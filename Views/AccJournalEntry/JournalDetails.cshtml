@@ -1,0 +1,83 @@
+﻿@{
+    
+}
+<div class="container p-3">
+    <div class="container">
+        <br>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>General Ledger Transaction Details</th>
+                    <th>Reference</th>
+                    <th>Transaction Date</th>
+                    <th>Document Date</th>
+                    <th>Event Date</th>
+                </tr>
+            </thead>
+            <tbody id="journalDetails"></tbody>
+        </table>
+        <table class="table table-sm table-hover table-bordered">
+            <thead class="dark-mode">
+                <tr style="background:#21909F;">
+                    <th class="text-center" scope="col">Journal Date</th>
+                    <th class="text-center" scope="col">Account Code</th>
+                    <th class="text-center" scope="col">Account Description</th>
+                    <th class="text-center" scope="col">Debit</th>
+                    <th class="text-center" scope="col">Credit</th>
+                    <th class="text-center" scope="col">Memo</th>
+                </tr>
+            </thead>
+            <tbody id="tGlPostingDetails" class="txt-align-left">
+            </tbody>
+        </table>
+        <div class="pt-3">
+            <button type="button" class="btn btn-primary print">Print</button>
+            <a type="button" class="btn btn-secondary" asp-controller="AccJournalEntry" asp-action="Journals">Back</a>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script src="~/js/accJournalEntry.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            var url = window.location.href;
+            var id = url.substring(url.lastIndexOf('=') + 1);
+
+           $.ajax({
+                type: "GET",
+                url: "/AccJournalEntry/GetById?id=" + id,
+                data: "{}",
+                success: function (data) {
+                    let items = data.items;
+                    $('#journalDetails').empty();
+                    $('#journalDetails').append(
+                        `<tr>
+                             <td>` + data.ajMemo + `</td>
+                             <td>` + data.ajRef + `</td>
+                             <td>` + data.ajTrDateString + `</td>
+                             <td>` + data.ajdDateString + `</td>
+                             <td>` + data.ajeDateString + `</td>
+                         </tr>`
+                    );
+
+                    $('#tGlPostingDetails').empty();
+                    for (var i = 0; i < items.length; i++) {
+                        $('#tGlPostingDetails').append(
+                            `<tr id="Item${++rowTableIdx}">
+                                <td hidden id="agtId${rowTableIdx}">` + items[i].agtId + `</td>
+                                <td id="ajTrDate${rowTableIdx}">` + items[i].ajTrDateString + `</td>
+                                <td id="agtAccCode${rowTableIdx}">` + items[i].agtAccCode + `</td>
+                                <td id="agtAccDescription${rowTableIdx}">` + items[i].agtAccDescription + `</td>
+                                <td id="agtDebitAccount${rowTableIdx}">` + items[i].agtDebitAccount + `</td>
+                                <td id="agtCreditAccount${rowTableIdx}">` + items[i].agtCreditAccount + `</td>
+                                <td id="agtMemo${rowTableIdx}">` + items[i].agtMemo + `</td>
+                            </tr>`
+                        );
+                    }
+                }
+            });
+        });
+    </script>
+}

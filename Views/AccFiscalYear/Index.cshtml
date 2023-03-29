@@ -1,0 +1,78 @@
+﻿@{
+    
+}
+<h6 style="color: #1275AE;">
+    Accounting > Maintenance > GL Fiscal Year >Fiscal Year setup
+</h6>
+<hr />
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Fiscal Year Setup</p>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-sm table-striped table-bordered">
+            <thead class="dark-mode">
+                <tr>
+                    <th class="text-center" scope="col">Fiscal Year Begin</th>
+                    <th class="text-center" scope="col">Fiscal Year End</th>
+                    <th class="text-center" scope="col">Closed</th>
+                    <th class="text-center" scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="tAccFiscalYearbody" class="txt-align-left">
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-8 m-auto">
+            <input id="afyId" type="hidden" value="0" />
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-3"><label>Fiscal Year Begin:</label></div>
+                    <div class="col-9">
+                        <input id="afyBeginDate" type="date" class="form-control" required />
+                        <input disabled id="afyBeginDateString" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3"><label>Fiscal Year End:</label></div>
+                    <div class="col-9">
+                        <input id="afyEndDate" type="date" class="form-control" required />
+                        <input disabled id="afyEndDateString" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-3"><label>Is Closed:</label></div>
+                    <div class="col-9">
+                        <select class="form-control" aria-label=".form-select-sm example" id="ddlIsClosed" required></select>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-3"></div>
+                    <div class="col-9 text-end">
+                        <div id="addNewItem" >
+                            <a id="addNewButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Add New</a>
+                        </div>
+                        <div id="updateExistingItem" >
+                            <a id="updateButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>update</a>
+                            <a id="cancelButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+@section Scripts{
+    <script src="~/js/accFiscalYear.js"></script>
+    <script>
+        $(document).ready(function () {
+            getInitData();
+            getAll();
+            resetValue();
+            setDate();
+        });
+    </script>
+}

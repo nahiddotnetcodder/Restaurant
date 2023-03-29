@@ -1,0 +1,30 @@
+﻿@model RMS.Models.StoreDClose
+
+<div class="row">
+    <div class="col-md-6 offset-3 dCloseForm">
+        <form asp-action="Index" onSubmit="return confirm('Are you sure, you want to close date?')">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-12"> 
+                <div class="row">
+                    <div class="form-group col-7">
+                        <label asp-for="SDCDate" class="control-label" style="margin: 8px 0; font-size:20px"></label>
+                    </div>
+                    <div class="form-group col-5">
+                        <input asp-for="SDCDate" class="form-control" style="font-size: 30px; background: none; border: none" readonly/>
+                       
+                    </div>
+                    <div class="form-group col-12">
+                        <input type="submit" value="Day Close" class="btn-primary btn-block dClose" onclick="myFun()" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

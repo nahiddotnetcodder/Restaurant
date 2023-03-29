@@ -1,0 +1,120 @@
+﻿@model IEnumerable<RMS.Models.HREmpSalary>
+@{
+
+    ViewData["Title"] = "Human Resource (HR) >  Operations > Employee Salary > Employee Salary List";
+    SortModel sortModel = (SortModel)ViewData["sortModel"];
+    PagerModel pager = ViewBag.Pager;
+    int i = 1;
+}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<div class="container-fluid btn-group">
+    <div class="col-10">
+        <h6 style="color: #1275AE; margin-top: 10px;">@ViewData["Title"]</h6>
+    </div>
+    <div class="col-2 justify-content-end">
+        <p class="pb-3">
+            <a asp-action="Create" class="btn btn-success">Create New</a>
+        </p>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-12">
+        <partial name="_topBar" model="@pager" />
+    </div>
+</div>
+<table class="table table-striped border">
+    <thead>
+        <tr>
+            <th>SL</th>
+            <th>
+                <i class="@sortModel.GetColumn("HRSYear").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("HRSYear").SortExpression">
+                    @Html.DisplayNameFor(model => model.HRSYear)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("HRSMonth").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("HRSMonth").SortExpression">
+                    @Html.DisplayNameFor(model => model.HRSMonth)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("HREmpDetails").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("HREmpDetails").SortExpression">
+                    @Html.DisplayNameFor(model => model.HREmpDetails.HREDEName)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("HRSBasic").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("HRSBasic").SortExpression">
+                    @Html.DisplayNameFor(model => model.HRSBasic)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("HRSGTotal").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("HRSGTotal").SortExpression">
+                    @Html.DisplayNameFor(model => model.HRSGTotal)
+                </a>
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HRSYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HRSMonth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HREmpDetails.HREDEName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HRSBasic)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HRSGTotal)
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a asp-action="Edit" asp-route-id="@item.HRSId">
+                            <span class="btn btn-sm ">
+                                <i class="fa-solid fa-pencil text-success" aria-hidden="true" title="Edit"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a asp-action="Details" asp-route-id="@item.HRSId">
+                            <span class="btn btn-sm ">
+                                <i class="fa-regular fa-eye text-primary" aria-hidden="true" title="Details"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a asp-action="Delete" asp-route-id="@item.HRSId">
+                            <span class="btn btn-sm remove">
+                                <i class="fa-solid fa-xmark text-danger" aria-hidden="true" title="Delete"></i>
+                            </span>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-12">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

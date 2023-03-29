@@ -1,0 +1,75 @@
+﻿@model List<ApplicationRole>
+@{
+    
+}
+<h6 style="color: #1275AE;">
+    Setup > Restaurant Setup > Access Setup > Role Setup
+</h6>
+<hr />
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Role Setup</p>
+    </div>
+    <div class="col-8 m-auto">
+        <div class="form-group">
+            <div class="row mt-3">
+                <div class="col-2"> </div>
+                <div class="col-5">
+                    <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlRoles"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  class="row">
+        <div class="col-8 m-auto">
+            <input id="id" type="hidden" value="0" />
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-2"><label>Name</label></div>
+                    <div class="col-5">
+                        <input id="name" type="text" class="form-control" required />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-2"><label>Description</label></div>
+                    <div class="col-5">
+                        <input id="description" type="text" class="form-control" required />
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-2"><label>Current status</label></div>
+                    <div class="col-5">
+                        <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlStatus"></select>
+                    </div>
+                </div>
+                <div id="menu"></div>
+
+                <div class="row ">
+                    <div class="col-3"></div>
+                    <div class="col-9 mt-3">
+                        <div id="addNewItem" class="col-8 text-center">
+                            <a id="addNewButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Add New</a>
+                        </div>
+                        <div id="updateExistingItem" >
+                            <a id="updateButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>update</a>
+                            <a id="cancelButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/role.js"></script>
+    <script>
+        $(document).ready(function () {
+            getInitData();
+            getRoles();
+            resetValue();
+            getAssignedMenus();
+        });
+    </script>
+}

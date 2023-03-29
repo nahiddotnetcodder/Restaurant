@@ -1,0 +1,77 @@
+﻿@{
+
+}
+<h6 style="color: #1275AE;">
+    Accounting > Maintenance > GL Accounts Classess > Account Chart
+</h6>
+<hr />
+
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Account Chart Setup</p>
+    </div>
+
+    <div class="card-body table-responsive">
+        <table class="table table-sm table-striped table-bordered">
+            <thead class="dark-mode">
+                <tr>
+                    <th class="text-center" scope="col">Class Id</th>
+                    <th class="text-center" scope="col">Class Name</th>
+                    <th class="text-center" scope="col">Class Type</th>
+                    <th class="text-center" scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="tAccChartListbody" class="txt-align-left">
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-8 m-auto">
+            <input id="accId" type="hidden" value="0" />
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-3"><label>Class ID</label></div>
+                    <div class="col-9">
+                        <input id="classId" type="text" class="form-control onlyNumber" required />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3"><label>Class Name</label></div>
+                    <div class="col-9">
+                        <input id="accName" type="text" class="form-control" required />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-3"><label>Class Type</label></div>
+                    <div class="col-9">
+                        <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlClassTypes" required></select>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-3"></div>
+                    <div class="col-9 text-end">
+                        <div id="addNewItem">
+                            <a id="addNewButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Add New</a>
+                        </div>
+                        <div id="updateExistingItem">
+                            <a id="updateButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>update</a>
+                            <a id="cancelButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/accchartclass.js"></script>
+    <script>
+        $(document).ready(function () {
+            getInitData();
+            getAllChartClass();
+            $("#addNewItem").show();
+            $("#updateExistingItem").hide();
+        });
+    </script>
+}

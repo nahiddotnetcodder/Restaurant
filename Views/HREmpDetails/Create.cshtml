@@ -1,0 +1,173 @@
+﻿@model RMS.Models.HREmpDetails
+@{
+    
+}
+<h6 style="color: #1275AE; margin-top: 10px;">
+    Human Resource (HR) > Maintenance > Employee Details > Create Employee Details
+</h6>
+<hr />
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Employee Details</p>
+    </div>
+    <!-- Form Area-->
+    <form asp-action="Create" enctype="multipart/form-data" method="post" onsubmit="return ValidateForm()">
+        <div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+        <div class="row p-3">
+            <div class="col-md-8">
+                <div class="row">
+                    <!-- controls section -->                   
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDEId" class="control-label"></label>
+                        <input asp-for="HREDEId" class="form-control" disabled/>
+                        <span asp-validation-for="HREDEId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDEName" class="control-label"></label>
+                        <input asp-for="HREDEName" class="form-control" />
+                        <span asp-validation-for="HREDEName" class="text-danger"></span>
+                    </div>
+                   
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDPreAdd" class="control-label"></label>
+                        <input asp-for="HREDPreAdd" class="form-control" />
+                        <span asp-validation-for="HREDPreAdd" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDParAdd" class="control-label"></label>
+                        <input asp-for="HREDParAdd" class="form-control" />
+                        <span asp-validation-for="HREDParAdd" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label asp-for="HRDId" class="control-label"></label>
+                        <select asp-for="HRDId" class="form-control" asp-items="ViewBag.HRDepartment"></select>
+                        <span asp-validation-for="HRDId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HRDeId" class="control-label"></label>
+                        <select asp-for="HRDeId" class="form-control" asp-items="ViewBag.HRDesignation"></select>
+                        <span asp-validation-for="HRDeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Gender" class="control-label"></label>
+                        <select asp-for="Gender" class="form-control" asp-items="@Html.GetEnumSelectList<Gender>()"></select>
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDReligion" class="control-label"></label>
+                        <select asp-for="HREDReligion" class="form-control" asp-items="@Html.GetEnumSelectList<HDEDReligion>()"></select>
+                        <span asp-validation-for="HREDReligion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDMStatus" class="control-label"></label>
+                        <select asp-for="HREDMStatus" class="form-control" asp-items="@Html.GetEnumSelectList<HDEDMStatus>()"></select>
+                        <span asp-validation-for="HREDMStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDNat" class="control-label"></label>
+                        <input asp-for="HREDNat" class="form-control" />
+                        <span asp-validation-for="HREDNat" class="text-danger"></span>
+                    </div>
+   
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDRef" class="control-label"></label>
+                        <input asp-for="HREDRef" class="form-control" />
+                        <span asp-validation-for="HREDRef" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDRAdd" class="control-label"></label>
+                        <input asp-for="HREDRAdd" class="form-control" />
+                        <span asp-validation-for="HREDRAdd" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDJDate" class="control-label"></label>
+                        <input asp-for="HREDJDate" class="form-control" />
+                        <span asp-validation-for="HREDJDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDBasic" class="control-label"></label>
+                        <input asp-for="HREDBasic" class="form-control" />
+                        <span asp-validation-for="HREDBasic" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HRWSId" class="control-label"></label>
+                        <select asp-for="HRWSId" class="form-control" asp-items="ViewBag.HRWStatus"></select>
+                        <span asp-validation-for="HRWSId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDEmail" class="control-label"></label>
+                        <input asp-for="HREDEmail" class="form-control" />
+                        <span asp-validation-for="HREDEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="IsWaiter" class="control-label"></label>
+                        <input asp-for="IsWaiter" type="checkbox" />
+                        <span asp-validation-for="IsWaiter" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="IsActive" class="control-label"></label>
+                        <input asp-for="IsActive" type="checkbox"  checked/>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" >
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label asp-for="HREDFName" class="control-label"></label>
+                        <input asp-for="HREDFName" class="form-control" />
+                        <span asp-validation-for="HREDFName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-12">
+                        <label asp-for="HREDCont" class="control-label"></label>
+                        <input asp-for="HREDCont" class="form-control" />
+                        <span asp-validation-for="HREDCont" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-12">
+                        <label asp-for="HREDBGroup" class="control-label"></label>
+                        <select asp-for="HREDBGroup" class="form-control" asp-items="@Html.GetEnumSelectList<HDEDBGroup>()">
+                        </select>
+                        <span asp-validation-for="HREDBGroup" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group col-12" style="margin-top: ;">
+                        <label asp-for="HREDPPhoto" class="control-label"></label>
+                        <div class="custom-file">
+                            <input asp-for="HREDPPhoto" class="custom-file-input" id="HREDPPhoto"
+                                   onchange="document.getElementById('PhotoPrv').src=window.URL.createObjectURL(this.files[0])">
+                            <label class="custom-file-label" for="HREDPPhoto">Choose file</label>
+                        </div>
+                        <span asp-validation-for="HREDPPhoto" class="text-danger"></span>
+                        <img id="PhotoPrv" src="~/images/@Model.HREDPUrl" style="border: 1px; margin: 10px; width: 300px; height: 300px;" />
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="form-group btn-group col-12 p-3">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <input type="submit" value="Create" class="btn btn-primary btn-block" style="font-size: 18px;" />
+            </div>
+            <div class="col-4">
+                <a class="btn btn-secondary btn-block" asp-action="index" style="font-size: 18px;"
+                   asp-route-pg="@TempData.Peek("CurrentPage")">Back</a>
+            </div>
+            <div class="col-2"></div>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript">
+        $(.custom - file - input).on("change", function () {
+            var fileName = $(this).val(), split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}   

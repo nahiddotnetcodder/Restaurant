@@ -1,0 +1,67 @@
+﻿@model RMS.Models.ResMenu
+@{
+
+}
+<h6 style="color: #1275AE; margin-top: 10px;">
+    Point Of Sale (POS) > Maintenance > Menu > Menu Entry
+</h6>
+<hr />
+
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Menu Entry</p>
+    </div>
+    <form asp-action="Create" class="pt-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+        <div class="btn-group">
+            <div class="col-md-10 m-auto">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label asp-for="@Model.RKId" class="control-label"></label>
+                        <select asp-for="@Model.RKId" class="form-control" asp-items="ViewBag.RKId"></select>
+                        <span asp-validation-for="@Model.RKId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="@Model.RFTId" class="control-label"></label>
+                        <select asp-for="@Model.RFTId" class="form-control" asp-items="ViewBag.RFTId"></select>
+                        <span asp-validation-for="@Model.RFTId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="@Model.RMItemCode" class="control-label"></label>
+                        <input asp-for="@Model.RMItemCode" class="form-control" />
+                        <span asp-validation-for="@Model.RMItemCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="@Model.RMItemName" class="control-label"></label>
+                        <input asp-for="@Model.RMItemName" class="form-control" />
+                        <span asp-validation-for="@Model.RMItemName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label asp-for="@Model.RMUPrice" class="control-label"></label>
+                        <input asp-for="@Model.RMUPrice" class="form-control" value="" />
+                        <span asp-validation-for="@Model.RMUPrice" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group btn-group col-12 p-3">
+                    <div class="col-2"></div>
+                    <div class="col-4">
+                        <input type="submit" value="Create" class="btn btn-primary btn-block" style="font-size: 18px;" />
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-secondary btn-block" asp-action="index" style="font-size: 18px;"
+                           asp-route-pg="@TempData.Peek("CurrentPage")">Back</a>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+
+}

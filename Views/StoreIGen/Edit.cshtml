@@ -1,0 +1,81 @@
+﻿@model RMS.Models.StoreIGen
+@{
+
+}
+<h6 style="color: #1275AE; margin-top: 10px;">
+    Store & Inventory > Maintenance > Item Generation > Edit Item
+</h6>
+<hr />
+
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Item Generation</p>
+    </div>
+    <form asp-action="Edit" class="pt-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+        <input type="hidden" asp-for="SIGId" />
+        <div class="btn-group">
+            <div class="col-md-10 m-auto">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label asp-for="@Model.SCId" class="control-label"></label>
+                        <select id="lstCategoryId" asp-for="@Model.SCId" class="form-control" asp-items="ViewBag.CategoryId" onchange="FillSubCat(this, 'lstSubCat');">
+                        </select>
+
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="@Model.SSCId" class="control-label"></label>
+                        <select id="lstSubCat" asp-for="@Model.SSCId" class="form-control" asp-items="ViewBag.StoreSCategory">
+                        </select>
+
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="@Model.SIGItemCode" class="control-label"></label>
+                        <input asp-for="@Model.SIGItemCode" class="form-control" />
+                        <span asp-validation-for="@Model.SIGItemCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="@Model.SIGItemName" class="control-label"></label>
+                        <input asp-for="@Model.SIGItemName" class="form-control" />
+                        <span asp-validation-for="@Model.SIGItemName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="@Model.SUId" class="control-label"></label>
+                        <select asp-for="@Model.SUId" class="form-control" asp-items="ViewBag.StoreUnits"></select>
+                        <span asp-validation-for="@Model.SUId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label asp-for="@Model.SIGRLevel" class="control-label"></label>
+                        <input asp-for="@Model.SIGRLevel" class="form-control"  />
+                        <span asp-validation-for="@Model.SIGRLevel" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-12">
+                        <label asp-for="@Model.SIGRemarks" class="control-label"></label>
+                        <textarea asp-for="@Model.SIGRemarks" class="form-control"></textarea>
+                        <span asp-validation-for="@Model.SIGRemarks" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group btn-group col-12 p-3">
+                    <div class="col-2"></div>
+                    <div class="col-4">
+                        <input type="submit" value="Update" class="btn btn-primary btn-block" style="font-size: 18px;" />
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-secondary btn-block" asp-action="index" style="font-size: 18px;"
+                           asp-route-pg="@TempData.Peek("CurrentPage")">Back</a>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+
+}

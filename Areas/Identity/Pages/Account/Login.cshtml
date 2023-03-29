@@ -1,0 +1,42 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+}
+
+<div class="form-box">
+    <form id="account" method="post">
+        <h4 class="text-white">Welcome</h4>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group py-2">
+            <input asp-for="Input.UserLogin" class="form-control" placeholder="Email Address" />
+        </div>
+        <div class="form-group ">
+            <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+        </div>
+        <div class="form-group py-2">
+            <div class="checkbox">
+                <label asp-for="Input.RememberMe">
+                    <input asp-for="Input.RememberMe" style="width:auto;" />
+                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                </label>
+            </div>
+        </div>
+        <div class="form-group py-2">
+            <input type="submit" class="btn btn-danger text-white" value="Log in">
+        </div>
+        <div class="form-group py-2">
+            <p>
+                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" ></partial>
+}
+

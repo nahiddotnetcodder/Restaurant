@@ -1,0 +1,120 @@
+﻿@model IEnumerable<RMS.Models.ResMenu>
+@{
+    SortModel sortModel = (SortModel)ViewData["sortModel"];
+    PagerModel pager = ViewBag.Pager;
+    int i = 1;
+}
+<div class="container-fluid btn-group">
+    <div class="col-10">
+        <h6 style="color: #1275AE; margin-top: 10px;">
+            Point Of Sale (POS) > Maintenance > Menu > Menu List
+        </h6>
+    </div>
+    <div class="col-2 justify-content-end">
+        <p class="pb-3">
+            <a asp-action="Create" class="btn btn-success">Create New</a>
+        </p>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-12">
+        <partial name="_topBar" model="@pager" />
+    </div>
+</div>
+<table class="table table-striped border m-0">
+    <thead>
+        <tr>
+            <th>
+                SL
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("RMItemCode").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("RMItemCode").SortExpression">
+                    @Html.DisplayNameFor(model => model.RMItemCode)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("RMItemName").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("RMItemName").SortExpression">
+                    @Html.DisplayNameFor(model => model.RMItemName)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("RMUPrice").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("RMUPrice").SortExpression">
+                    @Html.DisplayNameFor(model => model.RMUPrice)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("ResKInfo").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("ResKInfo").SortExpression">
+                    @Html.DisplayNameFor(model => model.ResKInfo.RKitchenName)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("ResFtype").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("ResFtype").SortExpression">
+                    @Html.DisplayNameFor(model => model.ResFtype.RFTName)
+                </a>
+            </th>
+            
+
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RMItemCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RMItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RMUPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResKInfo.RKitchenName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResFtype.RFTName)
+                </td>
+                
+                <td>
+                    <div class="btn-group">
+                        <a asp-action="Edit" asp-route-id="@item.RMId">
+                            <span class="btn btn-sm ">
+                                <i class="fa-solid fa-pencil text-success" aria-hidden="true" title="Edit"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a asp-action="Delete" asp-route-id="@item.RMId">
+                            <span class="btn btn-sm remove">
+                                <i class="fa-solid fa-xmark text-danger" aria-hidden="true" title="Delete"></i>
+                            </span>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-12">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}
+
+

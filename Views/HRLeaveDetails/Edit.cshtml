@@ -1,0 +1,92 @@
+﻿@model RMS.Models.HRLeaveDetail
+@{
+
+}
+<h6 style="color: #1275AE;">
+    Human Resource (HR) >  Operations > Leave Details > Edit Leave Details
+</h6>
+<hr />
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Leave Details</p>
+    </div>
+    <!-- Form Area-->
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+        <input type="hidden" asp-for="HRLDId" />
+        <div class="btn-group">
+            <div class="col-md-12">
+                <div class="row p-4">
+                    <!-- controls section -->
+                    <div class="form-group col-6">
+                        <label asp-for="HREDId" class="control-label"></label>
+                        <select asp-for="HREDId" class="form-control" asp-items="ViewBag.EmpDetails"></select>
+                        <span asp-validation-for="HREDId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HRLPId" class="control-label"></label>
+                        <select asp-for="HRLPId" class="form-control" asp-items="ViewBag.LeavePolicy" onchange="getExRate(this)"></select>
+                        <span asp-validation-for="HRLPId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HRLDAppSl" class="control-label"></label>
+                        <input asp-for="HRLDAppSl" class="form-control" />
+                        <span asp-validation-for="HRLDAppSl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HRLDAppDate" class="control-label"></label>
+                        <input asp-for="HRLDAppDate" class="form-control" />
+                        <span asp-validation-for="HRLDAppDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HRLDLeaveSDate" class="control-label"></label>
+                        <input asp-for="HRLDLeaveSDate" type="date" class="form-control" />
+                        <span asp-validation-for="HRLDLeaveSDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HRLDLeaveEDate" class="control-label"></label>
+                        <input asp-for="HRLDLeaveEDate" type="date" class="form-control" />
+                        <span asp-validation-for="HRLDLeaveEDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HREDIdSu" class="control-label"></label>
+                        <input id="txtExchangedays" asp-for="HREDIdSu" class="form-control" readonly />
+                        <span asp-validation-for="HREDIdSu" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HRLDTDay" class="control-label"></label>
+                        <input asp-for="HRLDTDay" class="form-control" />
+                        <span asp-validation-for="HRLDTDay" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-12">
+                        <label asp-for="HRLDReason" class="control-label"></label>
+                        <textarea asp-for="HRLDReason" class="form-control"></textarea>
+                        <span asp-validation-for="HRLDReason" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group btn-group col-1" style="position: absolute;">
+                <select id="dropdownExDay" class="form-control" size="1" style="visibility:hidden" asp-items="ViewBag.ExchangeRate"></select>
+            </div>
+        </div>
+       
+        <div class="form-group btn-group col-12 p-3">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <input type="submit" value="Update" class="btn btn-primary btn-block" style="font-size: 18px;" />
+            </div>
+            <div class="col-4">
+                <a class="btn btn-secondary btn-block" asp-action="index" style="font-size: 18px;"
+                   asp-route-pg="@TempData.Peek("CurrentPage")">Back</a>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/hrLeaveDetails.js"></script>
+}

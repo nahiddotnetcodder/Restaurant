@@ -1,0 +1,135 @@
+﻿@model IEnumerable<RMS.Models.StoreIGen>
+@{
+    SortModel sortModel = (SortModel)ViewData["sortModel"];
+    PagerModel pager = ViewBag.Pager;
+    int i = 1;
+}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<div class="container-fluid btn-group">
+    <div class="col-10">
+        <h6 style="color: #1275AE; margin-top: 10px;">
+            Store & Inventory > Maintenance > Item Generation > Item List
+        </h6>
+    </div>
+    <div class="col-2 justify-content-end">
+        <p class="pb-3">
+            <a asp-action="Create" class="btn btn-success">Create New</a>
+        </p>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-12">
+        <partial name="_topBar" model="@pager" />
+    </div>
+</div>
+<table class="table table-striped border m-0">
+    <thead>
+        <tr>
+            <th>
+                SL
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("StoreCategory").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("StoreCategory").SortExpression">
+                    @Html.DisplayNameFor(model => model.StoreCategory.SCName)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("StoreSCategory").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("StoreSCategory").SortExpression">
+                    @Html.DisplayNameFor(model => model.SSCId)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("StoreUnits").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("StoreUnits").SortExpression">
+                    @Html.DisplayNameFor(model => model.StoreUnits.SUName)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("SIGItemCode").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("SIGItemCode").SortExpression">
+                    @Html.DisplayNameFor(model => model.SIGItemCode)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("SIGItemName").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("SIGItemName").SortExpression">
+                    @Html.DisplayNameFor(model => model.SIGItemName)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("SIGRLevel").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("SIGRLevel").SortExpression">
+                    @Html.DisplayNameFor(model => model.SIGRLevel)
+                </a>
+            </th>
+
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoreCategory.SCName)
+                </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.StoreSCategory.SSCName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoreUnits.SUName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SIGItemCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SIGItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SIGRLevel)
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a asp-action="Edit" asp-route-id="@item.SIGId">
+                            <span class="btn btn-sm ">
+                                <i class="fa-solid fa-pencil text-success" aria-hidden="true" title="Edit"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a asp-action="Details" asp-route-id="@item.SIGId">
+                            <span class="btn btn-sm ">
+                                <i class="fa-regular fa-eye text-primary" aria-hidden="true" title="Details"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a asp-action="Delete" asp-route-id="@item.SIGId">
+                            <span class="btn btn-sm remove">
+                                <i class="fa-solid fa-xmark text-danger" aria-hidden="true" title="Delete"></i>
+                            </span>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-12">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}
+
+

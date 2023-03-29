@@ -1,0 +1,79 @@
+﻿
+@{
+    PagerModel pager = ViewBag.Pager;
+}
+<h6 style="color: #1275AE;">
+    Human Resource (HR) > Maintenance > Department > Department List
+</h6>
+<hr />
+
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Department setup</p>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-8 m-auto">
+            <input id="hrdId" type="hidden" value="0" />
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-3 text-center p-2"><label>Department</label></div>
+                    <div class="col-9">
+                        <input id="hrdName" type="text" class="form-control" required />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3 text-center p-2"><label>Description</label></div>
+                    <div class="col-9">
+                        <input id="hrdDes" type="text" class="form-control" required />
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-3"></div>
+                    <div class="col-9 text-end">
+                        <div id="addNewItem">
+                            <a id="addNewButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Add New</a>
+                        </div>
+                        <div id="updateExistingItem">
+                            <a id="updateButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>update</a>
+                            <a id="cancelButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body table-responsive">
+            
+            <table class="table table-sm table-striped table-bordered">
+                <thead class="dark-mode">
+                    <tr style="background:#21909F;">
+                        <th class="text-center" scope="col">Department</th>
+                        <th class="text-center" scope="col">Description</th>
+                        <th class="text-center" scope="col">Action</th>
+                     </tr>
+                </thead>
+                <tbody id="tDeptListbody" class="text-center">
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-12">
+                    <partial name="_bottomBar" model="@pager" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/hrDepartment.js"></script>
+    <script>
+        $(document).ready(function () {
+            getAllDeptClass();
+            $("#addNewItem").show();
+            $("#updateExistingItem").hide();
+        });
+    </script>
+}

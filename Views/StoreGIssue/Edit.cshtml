@@ -1,0 +1,106 @@
+﻿@model StoreGIssueMaster
+@{
+    
+}
+<div class="container p-3">
+    <div class="row">
+        <input hidden id="gimId" type="text" value="@Model.GIMId" class="form-control" />
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-4"><label> Date:</label></div>
+                    <div class="col-8">
+                        <input id="gimDate" type="date" class="form-control" value="@Model.GIMDateString" required />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-4"><label> Department Name</label></div>
+                    <div class="col-8">
+                        @*<select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlsupplierName" value="@Model.StoreSuppliersName" required> </select>*@
+                        @*<input id="ddlsupplierName" type="text" class="form-control" value="@Model.StoreSuppliersName" required />*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-4"><label> Remarks</label></div>
+                    <div class="col-8">
+                        <textarea id="gimRemarks" type="date" class="form-control" value="@Model.GIMRemarks" required ></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div style="margin-top:10px">
+            <div class="card-body table-responsive">
+                <span id="app_err-container"></span>
+                <table class="table table-sm  table-bordered">
+                    <thead class="dark-mode">
+                        <tr>
+                            <th class="text-center" scope="col">Item Code</th>
+                            <th class="text-center" scope="col">Item Name</th>
+                            <th class="text-center" scope="col">Quantity</th>
+                            <th class="text-center" scope="col">Unit Price</th>
+                            <th class="text-center" scope="col">Total Price</th>
+                            <th class="text-center" scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tGLPostingListbody" class="txt-align-left">
+                    </tbody>
+                </table>
+                <table class="table table-sm  table-bordered">
+                    <tr>
+                        <td style="width:18%"><input id="itemCode" type="text" class="form-control" required /></td>
+                        <td style="width:18.5%">
+                            <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlitemName" required>
+                                <option value="">Please Select Item Name</option>
+                            </select>
+                        </td>
+                        <td style="width:15.5%">
+                            <input id="grdQty" type="text" class="form-control" required />
+                        </td>
+                        <td style="width:17%">
+                            <input id="grduPrice" type="text" class="form-control" required />
+                        </td>
+                        <td style="width:18%">
+                            <input id="grdtPrice" type="text" class="form-control" required />
+                        </td>
+                        <td style="width:12%">
+                            <button type="button" id="addGLPosting" class="btn btn-secondary" onclick="addItem()">Add Item</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group btn-group col-12 p-3">
+        <div class="col-2"></div>
+        <div class="col-4">
+            <a id="updateButton" class="btn btn-primary btn-block" style="font-size: 18px;"><i class="bi bi-plus-circle"></i>Update </a>
+        </div>
+        <div class="col-4">
+            <a class="btn btn-secondary btn-block" asp-action="masterDetails" style="font-size: 18px;"
+               asp-route-pg="@TempData.Peek("CurrentPage")">Back To List</a>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/itemIssue.js"></script>
+    <script>
+        $(document).ready(function() {
+            getForEdit();
+            getDescriptionDD();
+            getForEdit();
+        });
+    </script>
+}

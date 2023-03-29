@@ -1,0 +1,79 @@
+﻿@{
+
+}
+<div class="container p-3">
+    <div class="container">
+        <br>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Department Name</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody id="ItemDetails"></tbody>
+        </table>
+        <table class="table table-sm table-hover table-bordered">
+            <thead class="dark-mode">
+                <tr style="background:#21909F;">
+                    <th class="text-center" scope="col">Item Code</th>
+                    <th class="text-center" scope="col">Item Name</th>
+                    <th class="text-center" scope="col">Unit</th>
+                    <th class="text-center" scope="col">Quantity</th>
+                    <th class="text-center" scope="col">Unit Price</th>
+                    <th class="text-center" scope="col">Total Price</th>
+                </tr>
+            </thead>
+            <tbody id="tGlPostingDetails" class="txt-align-left">
+            </tbody>
+        </table>
+        <div class="pt-3">
+            <button type="button" class="btn btn-primary print">Print</button>
+            <a type="button" class="btn btn-secondary" asp-controller="StoreGIssue" asp-action="masterDetails">Back</a>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script src="~/js/itemIssue.js"></script>
+    <script>
+        $(document).ready(function () {
+            
+            var url = window.location.href;
+            var id = url.substring(url.lastIndexOf('=') + 1);
+            
+            $.ajax({
+                type: "GET",
+                url: "/StoreGIssue/GetById?id=" + id,
+                data: "{}",
+                success: function (data) {
+                    let storeGIssueDetails = data.storeGIssueDetails;
+                    $('#ItemDetails').empty();
+                    $('#ItemDetails').append(
+                        `<tr>
+                            <td>` + data.gimDateString + `</td>
+                            <td>` + data.hrDepartName + `</td>
+                            <td>` + data.gimRemarks + `</td>
+                        </tr>`
+                    );
+
+                    $('#tGlPostingDetails').empty();
+                    for (var i = 0; i < storeGIssueDetails.length; i++) {
+                        $('#tGlPostingDetails').append(
+                            `<tr id="Item${++rowTableIdx}">
+                                    <td hidden id="gidId${rowTableIdx}">` + storeGIssueDetails[i].gidId + `</td>
+                                    <td id="itemCode${rowTableIdx}">` + storeGIssueDetails[i].itemCode + `</td>
+                                    <td id="itemDescription${rowTableIdx}">` + storeGIssueDetails[i].itemDescription + `</td>
+                                    <td id="unit${rowTableIdx}">` + storeGIssueDetails[i].unit + `</td>
+                                    <td id="gidQty${rowTableIdx}">` + storeGIssueDetails[i].gidQty + `</td>
+                                    <td id="giduPrice${rowTableIdx}">` + storeGIssueDetails[i].giduPrice + `</td>
+                                    <td id="gidtPrice${rowTableIdx}">` + storeGIssueDetails[i].gidtPrice + `</td>
+                              </tr>`
+                        );
+                    }
+                }
+            });
+        });
+    </script>
+}

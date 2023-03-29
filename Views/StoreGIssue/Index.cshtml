@@ -1,0 +1,113 @@
+﻿@{
+
+}
+<h6 style="color: #1275AE;">
+    Store & Inventory > Item Movement > Item Issue > Create Item Issue
+</h6>
+<hr />
+<div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+    <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Item Issue</p>
+</div>
+<div class="container p-3">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-4"><label> Date:</label></div>
+                    <div class="col-8">
+                        <input id="gimDate" type="date" class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="row mb-1">
+                    <div class="col-4"><label>Department Name</label></div>
+                    <div class="col-8">
+                        <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddldeptName" required> </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-2"><label>Note</label></div>
+                    <div class="col-10 mr-auto">
+                        <textarea id="gimRemarks" type="date" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div style="margin-top:10px">
+            <div class="card-body table-responsive">
+                <span id="app_err-container"></span>
+                <table class="table table-sm  table-bordered">
+                    <thead class="dark-mode">
+                        <tr>
+                            <th class="text-center" scope="col">Item Code</th>
+                            <th class="text-center" scope="col">Item Name</th>
+                            <th class="text-center" scope="col">Unit</th>
+                            <th class="text-center" scope="col">Quantity</th>
+                            <th class="text-center" scope="col">Unit Price</th>
+                            <th class="text-center" scope="col">Total Price</th>
+                            <th class="text-center" scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tGLPostingListbody" class="txt-align-left">
+                    </tbody>
+                </table>
+                <table class="table table-sm  table-bordered">
+                    <tr>
+                        <td style="width:16%"><input id="itemCode" type="text" class="form-control" required /></td>
+                        <td style="width:17.5%">
+                            <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlitemName" required>
+                                <option value="">Please Select Item Name</option>
+                            </select>
+                        </td>
+                        <td style="width:8.5%">
+                            <input id="unit" type="text" class="form-control" readonly />
+                        </td>
+                        <td style="width:15%">
+                            <input id="gidQty" type="text" class="form-control" required />
+                        </td>
+                        <td style="width:15%">
+                            <input id="giduPrice" type="text" class="form-control" readonly />
+                        </td>
+                        <td style="width:16.5%">
+                            <input id="gidtPrice" type="text" class="form-control" readonly />
+                        </td>
+                        <td style="width:11.5%">
+                            <button type="button" id="addGLPosting" class="btn btn-secondary" onclick="addItem()">Add Item</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group btn-group col-12 p-3">
+        <div class="col-2"></div>
+        <div class="col-4">
+            <a id="addNewButton" class="btn btn-primary btn-block" style="font-size: 18px;"><i class="bi bi-plus-circle"></i>Create</a>
+        </div>
+        <div class="col-4">
+            <a class="btn btn-secondary btn-block" asp-action="masterDetails" style="font-size: 18px;"
+               asp-route-pg="@TempData.Peek("CurrentPage")">Back To List</a>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/itemIssue.js"></script>
+    <script>
+        $(document).ready(function () {
+            getInitData();
+            dateValue();
+        });
+    </script>
+}

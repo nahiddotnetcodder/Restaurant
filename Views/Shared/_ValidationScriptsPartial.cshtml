@@ -1,0 +1,34 @@
+﻿<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+
+<script type="text/javascript">
+
+    //function openSuccessModal(strMessage){
+    //    var myDiv = document.getElementById("MyModalSuccessAlertBody");
+    //    myDiv.innerHTML =strMessage;
+    //    $('#myModalSuccess').modal('show');
+    //}
+
+    //$(document).ready(function (){
+    //     var msg = "@TempData["SuccessMessage"]";
+    //    if (msg)
+    //        openSuccessModal(msg);
+    //});
+
+
+    $(document).ready(function (){
+
+        var smsg = "@TempData["SuccessMessage"]";
+        if (smsg != "") {
+            alertify.success(smsg);
+        }
+        var emsg = "@TempData["ErrorMessage"]";
+        if (emsg != "") {
+            alertify.error(emsg);
+        }
+        
+    });
+
+</script>
+

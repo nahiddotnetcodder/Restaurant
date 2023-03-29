@@ -1,0 +1,118 @@
+﻿@{
+    
+}
+<h6 style="color: #1275AE;">
+   Accounting > Maintenance > GL Accounts > Master Account List
+</h6>
+<hr />
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Account Master Setup</p>
+    </div>
+    <div class="col-8 m-auto">
+        <div class="row mt-4">
+        <div class="col-8">
+            <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlAccounts" required></select>
+            
+        </div>
+        <div class="col-1  text-right">
+            <button type="button" id="searchModalButton" class="btn " data-toggle="modal" data-target="#searchModal">
+                <i class="fas fa-search text-dark"></i>
+            </button>
+        </div>
+        <div class="col-3 pt-3 text-right">
+            <label>Show Inactive:</label>
+            <input type="checkbox" id="switch-id" />
+        </div>
+    </div>
+    </div>
+    
+    <div style="margin-top:40px" class="row">
+        <div class="col-8 m-auto">
+            <input id="acmId" type="hidden" value="0" />
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-3"><label>Account Code:</label></div>
+                    <div class="col-9">
+                        <input id="acmAccCode" type="text" class="form-control onlyNumber" required />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-3"><label>Account Name:</label></div>
+                    <div class="col-9">
+                        <input id="acmAccName" type="text" class="form-control" required />
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-3"><label>Account Group:</label></div>
+                    <div class="col-9">
+                        <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlAccChartTypes" required></select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-3"><label>Account Status:</label></div>
+                    <div class="col-9">
+                        <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlStatuses" required></select>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-3"></div>
+                    <div class="col-9 mt-3">
+                       <div id="addNewItem" >
+                            <a id="addNewButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Add Account</a>
+	                    </div>
+                        <div id="updateExistingItem" >
+                            <a id="updateButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Update Account</a>
+                            <a id="cancelButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Cancel</a>
+	                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/accChartMaster.js"></script>
+    <script>
+        $(document).ready(function () {
+            getAllAccount();
+            getInitData();
+            $("#addNewItem").show();
+            $("#updateExistingItem").hide();
+        });
+        $(document).ready(function(){
+          $("#searchAccount").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#searchableBankAccount tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+    </script>
+}
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="container">
+          <input class="form-control" id="searchAccount" type="text" placeholder="Search..">
+          <br>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Account Code</th>
+                <th>Description</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tbody id="searchableBankAccount"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

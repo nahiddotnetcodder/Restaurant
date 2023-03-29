@@ -1,0 +1,60 @@
+﻿@model RMS.Models.HREmpSalary
+@{
+    
+}
+<h6 style="color: #1275AE; margin-top: 10px;">
+    Human Resource (HR) > Operations > Employee Salary > Edit Employee Salary
+</h6>
+<hr />
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Update Employee Salary</p>
+    </div>
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+        <div class="col-md-12">
+            <div class="row p-3">
+                <div class="form-group col-md-3">
+                    <label asp-for="HRSYear" class="control-label"></label>
+                    <select asp-for="HRSYear" class="form-control" asp-items="@Html.GetEnumSelectList<HRSYear>()"></select>
+                    <span asp-validation-for="HRSYear" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="HRSMonth" class="control-label"></label>
+                    <select asp-for="HRSMonth" class="form-control" asp-items="@Html.GetEnumSelectList<HRSMonth>()"></select>
+                    <span asp-validation-for="HRSMonth" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="HREDId" class="control-label"></label>
+                    <select asp-for="HREDId" class="form-control" asp-items="ViewBag.HREmpDetails">
+                        <option>--Select Employee Name--</option>
+                        <option value="1">All</option>
+                    </select>
+                    <span asp-validation-for="HREDId" class="text-danger"></span>
+                </div>
+                @*<div class="form-group">
+                <label asp-for="HRSBasic" class="control-label"></label>
+                <input asp-for="HRSBasic" class="form-control" value=""/>
+                <span asp-validation-for="HRSBasic" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="HRSGTotal" class="control-label"></label>
+                <input asp-for="HRSGTotal" class="form-control" value="" />
+                <span asp-validation-for="HRSGTotal" class="text-danger"></span>
+                </div>*@
+                <div class="form-group col-3 mt-4">
+                    <label></label>
+                    <input type="submit" value="Genarate" class="btn btn-primary" style="font-size: 18px;" />
+                    <a class="btn btn-secondary " asp-action="index" style="font-size: 18px;"
+                       asp-route-pg="@TempData.Peek("CurrentPage")">Back</a>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

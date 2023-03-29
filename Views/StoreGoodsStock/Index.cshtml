@@ -1,0 +1,108 @@
+﻿@model IEnumerable<RMS.Models.StoreGoodsStock>
+@{
+    SortModel sortModel = (SortModel)ViewData["sortModel"];
+    PagerModel pager = ViewBag.Pager;
+    int i = 1;
+}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<div class="container-fluid btn-group">
+    <div class="col-10">
+        <h6 style="color: #1275AE; margin-top: 10px;">
+            Store & Inventory > Inquiries & Reports > Item Stock > Item Stock List
+        </h6>
+    </div>
+
+</div>
+<br />
+<div class="row">
+    <div class="col-12">
+        <partial name="_topBar" model="@pager" />
+    </div> 
+</div>
+<table class="table table-striped border m-0">
+    <thead>
+        <tr>
+            <th>
+                SL
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("ItemCode").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("ItemCode").SortExpression">
+                    @Html.DisplayNameFor(model => model.ItemCode)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("ItemName").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("ItemName").SortExpression">
+                    @Html.DisplayNameFor(model => model.ItemName)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("Unit").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("Unit").SortExpression">
+                    @Html.DisplayNameFor(model => model.Unit)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("SGSQty").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("SGSQty").SortExpression">
+                    @Html.DisplayNameFor(model => model.SGSQty)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("SGSUPrice").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("SGSUPrice").SortExpression">
+                    @Html.DisplayNameFor(model => model.SGSUPrice)
+                </a>
+            </th>
+
+            <th>
+                <i class="@sortModel.GetColumn("SGSTPrice").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("SGSTPrice").SortExpression">
+                    @Html.DisplayNameFor(model => model.SGSTPrice)
+                </a>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SGSQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SGSUPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SGSTPrice)                   
+                </td>
+                
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-12">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

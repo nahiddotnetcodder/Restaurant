@@ -1,0 +1,117 @@
+﻿@{
+    
+}
+<h6 style="color: #1275AE;">
+    Accounting > Maintenance > Bank Accounts > Bank Account Setup
+</h6>
+<hr />
+<div class="card mb-4">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Bank Account Setup</p>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <input id="abaId" type="hidden" value="0" />
+                    <div class="row mb-1">
+                        <div class="col-5"><label>Bank Account Name</label></div>
+                        <div class="col-7">
+                            <input id="ababaName" type="text" class="form-control" value="" required />
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-5"><label>Account Type</label></div>
+                        <div class="col-7">
+                            <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlAccType"></select>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-5"><label>Bank Account Gl Code</label></div>
+                        <div class="col-7">
+                            <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlAccCodes" required>
+                                <option value="">Please Select Account</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-5"><label>Bank Address</label></div>
+                        <div class="col-7">
+                            <textarea id="ababAdd" class="form-control" required></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <div class="row mb-1">
+                        <div class="col-5"><label>Bank Name</label></div>
+                        <div class="col-7">
+                            <input id="ababName" type="text" class="form-control" required />
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-5"><label>Bank Account Number</label></div>
+                        <div class="col-7">
+                            <input id="ababaNumber" type="text" class="form-control" required />
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-5"><label>Bank Charges Account</label></div>
+                        <div class="col-7">
+                            <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlAccCode" required>
+                                <option value="">Please Select Account</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row col-md-7 m-auto">
+            <div class="col-9 text-end">
+                <div id="addNewItem">
+                    <a id="addNewButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Add New</a>
+                </div>
+                <div id="updateExistingItem">
+                    <a id="updateButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Update</a>
+                    <a id="cancelButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Cancel</a>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:10px" class="card">
+            <div class="card-body table-responsive">
+                <table class="table table-sm table-striped table-bordered">
+                    <thead class="dark-mode">
+                        <tr style="background:#21909F;">
+                            <th class="text-center" scope="col">Bank Account Name</th>
+                            <th class="text-center" scope="col">Account Type</th>
+                            <th class="text-center" scope="col">Bank Code</th>
+                            <th class="text-center" scope="col">Bank Account Code</th>
+                            <th class="text-center" scope="col">Bank Name</th>
+                            <th class="text-center" scope="col">Bank Account Number</th>
+                            <th class="text-center" scope="col">Bank Address</th>
+                            <th class="text-center" scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tBankAccountListbody" class="text-center">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+@section Scripts{
+    <script src="~/js/accBankAccounts.js"></script>
+    <script>
+        $(document).ready(function () {
+            getInitData();
+            setCurrentDate();
+            getAllClass();
+            restValue();
+        });
+    </script>
+}

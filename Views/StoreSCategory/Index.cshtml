@@ -1,0 +1,77 @@
+﻿@{
+    PagerModel pager = ViewBag.Pager;
+}
+<h6 style="color: #1275AE;">
+    Store & Inventory > Maintenance >Sub Category > Category Setup
+</h6>
+<hr />
+
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Sub Category Setup</p>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-8 m-auto">
+            <input id="sscId" type="hidden" value="0" />
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-3"><label>Category Name</label></div>
+                    <div class="col-9">
+                        <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlcatName"></select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-3"><label>Sub Category Name</label></div>
+                    <div class="col-9">
+                        <input id="sscname" type="text" class="form-control" required />
+                    </div>
+                </div>
+                
+                <div class="row ">
+                    <div class="col-3"></div>
+                    <div class="col-9 text-end">
+                        <div id="addNewItem">
+                            <a id="addNewButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Add New</a>
+                        </div>
+                        <div id="updateExistingItem">
+                            <a id="updateButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>update</a>
+                            <a id="cancelButton" class="btn btn-primary"><i class="bi bi-plus-circle"></i>cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="card-body table-responsive">
+
+        <table class="table table-sm table-striped table-bordered">
+            <thead class="dark-mode">
+                <tr style="background:#21909F;">
+                    <th class="text-center" scope="col">Category Name</th>
+                    <th class="text-center" scope="col"> Sub Category Name</th>
+                    <th class="text-center" scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="tSubCatListbody" class="text-center">
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-12">
+                <partial name="_bottomBar" model="@pager" />
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/storeSubCat.js"></script>
+    <script>
+        $(document).ready(function () {
+            getInitData();
+            getAllSubCategoryClass();
+            $("#addNewItem").show();
+            $("#updateExistingItem").hide();
+        });
+    </script>
+}

@@ -1,0 +1,145 @@
+﻿@{
+
+}
+<style>
+    .resmanager{
+        height: 250px;
+        overflow:auto;
+    }
+    .fixbtn{
+        width: 120px;
+        align-items:center;
+        text-align: center;
+        margin:5px;
+    }
+</style>
+<h6 style="color: #1275AE;">
+    Point Of Sale(POS) > Maintenance > Recipe Manager > Create Recipe
+</h6>
+<hr />
+<div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+    <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Recipe Setup</p>
+</div>
+<div class="container p-3">
+    <div class="row pb-4">
+        <div class="col-md-4">
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-4"><label> Item Code </label></div>
+                    <div class="col-8">
+                        <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddliteCode" required>
+                                <option value="">Please Select Item Name</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-4 text-center"><label> Item Name </label></div>
+                    <div class="col-8">
+                        <input id="rmItemName" type="text" class="form-control" required />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card col-md-4 mr-4">
+            <h4 class="pt-2 text-center">Ingredients List</h4>
+            <div class="form-group resmanager">
+                <div class="row m-2 ">
+                    <table class="table table-sm  table-hover table-bordered">
+                        <thead class="dark-mode" >
+                            <tr style="background: #21909F">
+                                <th class="text-center" scope="col">Item Code</th>
+                                <th class="text-center" scope="col">Item Name</th>
+                                <th class="text-center" scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tStockListbody" class="txt-align-left">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>   
+        <div class="card col-md-5 mr-4" >
+            <div class="form-group" style="background: #21909F; color: #fff">
+                <h4 class="text-center">Item List</h4>
+            </div>
+            <div class="form-group">
+                <div class="row p-2">
+                    <div class="form-group col-md-6">
+                        <label> Item Code </label>
+                        <input id="sigItemCode" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label> Item Name </label>
+                        <input id="sigItemName" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label> Quatity </label>
+                        <input id="rmdQty" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label> Recipe Unit </label>
+                        <input id="sigUnit" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label> Recipe Unit Cost </label>
+                        <input id="sgsUPrice" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label> Total Cost </label>
+                        <input id="totalCost" type="text" class="form-control" readonly  />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card col-md-2 m-auto">
+            <div class="form-group ">
+                <div class="row m-2">
+                    <button type="button" id="addGLPosting" class="btn btn-secondary fixbtn" onclick="addItem()">Add Item</button>            
+                    <a type="button" class="btn btn-success fixbtn" asp-action="masterDetails">Back To List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9 mr-4">
+            <table class="table table-sm table-striped table-bordered">
+                <thead class="dark-mode">
+                    <tr style="background:#21909F;">
+                        <th class="text-center" scope="col">Item Code</th>
+                        <th class="text-center" scope="col">Item Name</th>
+                        <th class="text-center" scope="col">Quantity</th>
+                        <th class="text-center" scope="col">Unit</th>
+                        <th class="text-center" scope="col">Unit Cost</th>
+                        <th class="text-center" scope="col">Total Cost</th>
+                        <th class="text-center" scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="titemListbody" class="text-center">
+                </tbody>
+            </table>
+        </div>
+        <div class="card col-md-2 m-auto">
+             <div class="form-group ">
+                <div class="row m-2">
+                    <a id="addNewButton" class="btn btn-primary btn-block" style="font-size: 18px;"><i class="bi bi-plus-circle"></i>Create</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script src="~/js/recManager.js"></script>
+    <script>
+        $(document).ready(function () {
+            getInitData();
+            getAllStockTable();
+        });
+    </script>
+}

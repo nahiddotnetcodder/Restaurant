@@ -1,0 +1,261 @@
+
+@font-face {
+    font-family: 'brush script mt kursiv';
+    src: url('../font/brush script mt kursiv.ttf') format('truetype');
+
+}
+@font-face {
+    font-family: 'helvetica-bold';
+    src: url('../font/helvetica-bold.ttf') format('truetype'), url('../font/helvetica-boldoblique.ttf') format('truetype'), url('../font/helvetica-oblique.ttf') format('truetype'), url('../font/helvetica.ttf') format('truetype');
+}
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ul li{
+    list-style: none;
+}
+.validation-summary-errors{
+    font-size: 20px;
+}
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+    @font-face {
+        font-family: 'helvetica-bold';
+        src: url('../font/helvetica-bold.ttf') format('truetype'), url('../font/helvetica-boldoblique.ttf') format('truetype'), url('../font/helvetica-oblique.ttf') format('truetype'), url('../font/helvetica.ttf') format('truetype');
+    }
+}
+
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+body {
+    font-size: 14px;
+    font-family: font-family: 'helvetica';
+}
+.table, table, tr, th, td, col, a, p, border {
+    margin:0;
+    padding:0;
+}
+.navbar{
+    color:#fff;
+}
+@font-face {
+    font-family: 'helvetica';
+    src: url('../font/helvetica.ttf') format('truetype');
+}
+.sidebar > p{
+    color: #fff;
+}
+
+.sidebar ul > li {
+    color: #fff;
+}
+
+
+
+/*login css*/
+.form-box {
+    background-color: rgba(0, 0, 0, 0.3);
+    margin: auto auto;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #000;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 400px;
+    height: 400px;
+    text-align: center;
+    color: #fff;
+}
+
+.form-box:before {
+    background-image: url('../images/background 150p-01.jpg');
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    content: "";
+    position: fixed;
+    background-position: center;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    display: block;
+    filter: blur(2px);
+}
+
+.form-box a{
+    color:#fff;
+}
+/*end*/
+/*registration form css*/
+.register-box {
+    /* background-color: rgba(0, 0, 0, 0.4);*/
+    background-color: #1abc9c;
+    margin: auto auto;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #000;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 600px;
+    color: #fff;
+}
+.form-box-register{
+    /*background-image: url('../images/background 150p-01.jpg');*/
+    width: 100%;
+    height: 100vh !important;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+.form-box-register label{
+    font-size: 18px;
+    padding: 5px;
+}
+
+.sidebar .nav-pills .nav-link {
+    color: white;
+}
+
+
+.main-header ul li > a, i {
+    color: #fff;
+}
+
+table > thead > tr {
+    background: #1275AE;
+    color: #fff;
+}
+
+.sidebar .nav-pills .nav-link{
+    transition: 0.3s;
+}
+.sidebar .nav-pills .nav-link:hover {
+    background-color: #0D6EFD;
+    color: #fff;
+}
+
+.table, table{
+    border-top: none;
+}
+
+table  tr  th  a{
+    color: #fff;
+}
+table tr th a:hover {
+    color: #fff;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: green !important;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #21909F;
+}
+.sidebar .nav-pills .nav-link:hover {
+    background-color: #21909F;
+    color: #fff;
+}
+
+/*search-bar css*/
+.sidebar-search-results .list-group > .list-group-item {
+    background: #0DCAF0;
+    color: #fff;
+}
+
+
+/*master details table*/
+
+.CodesTable table {
+    width: 100%
+}
+
+.CodesTable thead {
+    width: calc(100%-1em);
+}
+
+.CodesTable tbody {
+    display: block;
+    height: 150px;          
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.CodesTable thead, .CodesTable tbody tr {
+    display: table;
+    width: 98%;
+    table-layout: fixed;
+}
+
+.CodesTable thead, .CodesTable tbody, .CodesTable td {
+    border: none !important;
+}
+.QtyTotal {
+    background-image: none;
+}
+
+.PriceTotal {
+    background-image: none;
+}
+
+.AmountTotal {
+    background-image: none;
+}
+
+.txt {
+    color: #fff;
+}
+
+.dClose {
+    height: 60px;
+    border-radius: 5px;
+    border: none;
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.dCloseForm{
+    margin: 120px auto;
+}
+
+.alertify-notifier {
+    top: 30px;
+    color: #fff;
+    text-align: center;
+}
+
+.alertify-notifier.ajs-right {
+    top: 10px;
+}
+
+.alertify-notifier.ajs-bottom {
+    right: 30%;
+}

@@ -1,0 +1,39 @@
+﻿@{
+
+}
+<div id="nonPrintArea" class="container p-3">
+    <div class="card">
+        <div class="card-body table-responsive">
+            <span id="app_err-container"></span>
+            <div class="row">
+                <div class="col-10">
+                </div>
+                <div class="col-2" style="text-align: end">
+                    <p class="pb-3">
+                        <a asp-action="Index" asp-controller="RecManager" class="btn btn-success">Create New</a>
+                    </p>
+                </div>
+            </div>
+            <table class="table table-sm table-hover table-bordered">
+                <thead class="dark-mode">
+                    <tr>
+                        <th class="text-center" scope="col">Recipe Code</th>
+                        <th class="text-center" scope="col">Recipe Name</th>
+                        <th class="text-center" scope="col">User</th>
+                        <th class="text-center" scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tJournalListbody" class="text-center">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/recManager.js"></script>
+    <script>
+        $(document).ready(function () {
+            getAll();
+        });
+    </script>
+}

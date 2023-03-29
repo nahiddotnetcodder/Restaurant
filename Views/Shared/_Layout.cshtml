@@ -1,0 +1,970 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Bhoj | Restaurant ERP</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/plugins/summernote/summernote-bs4.min.css">
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/RMS.Web.styles.css" asp-append-version="true" />
+    <link href="~/css/alertify.css" rel="stylesheet" />
+    <link href="~/css/jquery-confirm.min.css" rel="stylesheet" />
+   @* <link href="~/lib/select2/css/select2.css" rel="stylesheet" />*@
+
+
+    <script>
+            function showErrorMessageBelowCtrl(ctrlId, message, show) {
+
+                var divHtml = '<div style="color:red;" id="' + ctrlId + '_err_div" >' + message + '</div>';
+
+                if (show == true) {
+                    $('#' + ctrlId).addClass("highlight");
+                    $('#' + ctrlId).after(divHtml);
+                } else {
+                    $('#' + ctrlId).removeClass("highlight");
+                    $('#' + ctrlId + '_err_div').remove();
+                }
+            }
+        </script>
+
+    </head>
+    
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+
+
+
+  <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand  text-light" style="background-color:#1275AE;">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">15</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+
+    </ul>
+    <partial name="_LoginPartial"/>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+        <aside class="main-sidebar  elevation-4" style="background: linear-gradient(to left, #2C5364, #203A43, #0F2027)">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link">
+      <img src="~/images/band-logo.png" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light" style="color:#fff; font-family: 'Brush Script MT'; font-weight: 700; font-size:20px;">
+          RMS
+
+     </span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="TypeGrid">
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+            <input class="form-control form-control-sidebar" id="txtSearch" name="txtSearch" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a  asp-action="index" asp-controller="Home" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>           
+          </li>
+
+                        @*point of sales*@
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fa-solid fa-utensils"></i>
+                <p>
+                    Point Of Sale (POS)
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href=#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Operations</p>
+                        <i class="fas fa-angle-left right"></i>
+                    </a>
+                    <ul class="nav nav-treeview ml-2">
+
+                                        @*operations dropdown start*@
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="RDClose" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Sales
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="RDClose" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Bill Print
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="RDClose" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Bill Receive
+                                </p>
+                            </a>
+                        </li>
+                                        @*operations dropdown end*@
+
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="pages/mailbox/read-mail.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Inquiries & Reports </p>
+                        <i class="fas fa-angle-left right"></i>
+                    </a>
+                    <ul class="nav nav-treeview ml-2">
+
+                                        @*inquires start*@
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="ResTable"  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    a
+                                </p>
+                            </a>
+                        </li>
+
+                                        @*inquires end*@
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="pages/mailbox/read-mail.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Maintenance</p>
+                        <i class="fas fa-angle-left right"></i>
+                    </a>
+                    <ul class="nav nav-treeview ml-2">
+
+                                        @*Maintenance start*@
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="HRDepartment" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Menu Entry
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="ResFoodType"  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Food Type
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="ResKitchenInfo"  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Kitchen Information
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="ResTable" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Table Setup
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="ResMenu" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Menu 
+                                </p>
+                            </a>
+                        </li>
+                        
+                       @*Maintenance end*@
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+                        @* Store and Inventory*@
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-store-alt"></i>
+              <p>
+                Store & Inventory
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+               <li class="nav-item">
+                <a href="pages/mailbox/read-mail.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Item Movement</p>
+                  <i class="fas fa-angle-left right"></i>
+                </a>
+                <ul class="nav nav-treeview ml-2">
+
+                 @*item movement start*@
+                    <li class="nav-item">
+                        <a asp-action="masterDetails" asp-controller="StoreGReceive" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>
+                                Item Receive
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                                            <a asp-action="masterDetails" asp-controller="StoreGIssue" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>
+                                Item Issue
+                            </p>
+                        </a>
+                    </li>
+
+                    @*item movement end*@
+                  </ul>
+              </li>
+                <li class="nav-item">
+                    <a href="pages/mailbox/read-mail.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Inquiries & Reports</p>
+                        <i class="fas fa-angle-left right"></i>
+                    </a>
+                    <ul class="nav nav-treeview ml-2">
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="StoreGoodsStock" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Item Stock
+                                </p>
+                            </a>
+                        </li>
+                                        @*Inquiries & Reports end*@
+                    </ul>
+                </li>
+              <li class="nav-item">
+                <a href="pages/mailbox/compose.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Maintenance</p> @* solve name*@
+                  <i class="fas fa-angle-left right"></i>
+                </a>
+                <ul class="nav nav-treeview ml-2">
+
+                  @*setup dropdown start*@
+                    <li class="nav-item">
+                        <a asp-action="Index" asp-controller="StoreIGen" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>
+                                Item Generation
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-action="Index" asp-controller="StoreUnit" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>
+                                Unit
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Index" asp-controller="StoreSCategory" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>
+                                Sub Category
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Index" asp-controller="StoreCategory" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>
+                                Store Category
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Index" asp-controller="StoreSuppliers" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>
+                                Store Suppliers
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Index" asp-controller="StoreDClose" asp-area="" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>
+                                Day Close
+                            </p>
+                        </a>
+                    </li>
+                  @*setup dropdown end*@
+
+
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+         @*Human Resource*@
+         <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                    Human Resource (HR)
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="pages/mailbox/read-mail.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Operations</p>
+                        <i class="fas fa-angle-left right"></i>
+                    </a>
+                    <ul class="nav nav-treeview ml-2">
+
+                                        @*Oparations start*@
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="HREmpSalary" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Employee Salary
+                                </p>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="HREmpRoaster" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Employee Roaster
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="HREmpAtt"  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Employee Attendance
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="HRLeaveDetails" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Leave Details
+                                </p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="pages/mailbox/compose.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Inquiries & Reports</p>
+                        <i class="fas fa-angle-left right"></i>
+                    </a>
+                    <ul class="nav nav-treeview ml-2">
+
+                                        @*Restaurant setup*@
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="RDClose"  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Restaurant Setup
+                                </p>
+                            </a>
+                        </li>
+
+
+
+
+                    </ul>
+                </li>
+
+
+                <li class="nav-item">
+                    <a href="pages/mailbox/read-mail.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Maintenance</p>
+                        <i class="fas fa-angle-left right"></i>
+                    </a>
+                    <ul class="nav nav-treeview ml-2">
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="HREmpDetails"  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Employee Details
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="HRDesignation"  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Designation
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="HRDepartment" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Department
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="HRWStatus" asp-area="" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Work Status
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="HRWeekend" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Weekend
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="HRLeavePolicy" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Leave Policy
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="HRSalaryPolicy"  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Salary Policy
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="HRHolidays" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Holidays
+                                </p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+            @*Accounting menu*@
+           <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Accounting
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="pages/mailbox/compose.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Transactions</p>
+                            <i class="fas fa-angle-left right"></i>
+                        </a>
+                        <ul class="nav nav-treeview ml-2">
+
+                                        @*setup dropdown start*@                     
+
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller="StoreIGen" asp-area="Admin" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Payments
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller="StoreIGen" asp-area="Admin" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Deposits
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller="StoreIGen" asp-area="Admin" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Bank Account Transfers
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                            <a asp-action="Index" asp-controller="AccJournalEntry" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Journal Entry
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller="StoreIGen" asp-area="Admin" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Reconcile Bank Account
+                                    </p>
+                                </a>
+                            </li>
+
+                                        @*setup dropdown end*@
+
+
+                        </ul>
+                    </li>
+                     <li class="nav-item">
+                        <a href="pages/mailbox/compose.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                               <p> Inquiries & Reports</p>
+                            <i class="fas fa-angle-left right"></i>
+                        </a>
+                        <ul class="nav nav-treeview ml-2">
+
+                                        @*setup dropdown start*@                     
+
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller=""  class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Chat of Accounts
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                            <a asp-action="Journals" asp-controller="AccJournalEntry" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        List of Journal Entries
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller="StoreIGen" asp-area="Admin" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        GL Account Transactions
+                                    </p>
+                                </a>
+                            </li> 
+
+                             <li class="nav-item">
+                                <a asp-action="Index" asp-controller="StoreIGen" asp-area="Admin" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Annual Exp. Breakdown
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller="StoreIGen" asp-area="Admin" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Balance Sheet
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller="StoreIGen" asp-area="Admin" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Profit and Loss Statement
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller="StoreIGen" asp-area="Admin" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Trial Balance
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller="StoreIGen" asp-area="Admin" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Audit Trail
+                                    </p>
+                                </a>
+                            </li>
+                                        @*setup dropdown end*@
+
+
+                        </ul>
+                    </li>
+                     <li class="nav-item">
+                        <a href="pages/mailbox/compose.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                                        <p>Maintenance</p>
+                            <i class="fas fa-angle-left right"></i>
+                        </a>
+                        <ul class="nav nav-treeview ml-2">
+
+                                        @*setup dropdown start*@
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller="AccBankAccounts"  class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Bank Accounts
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller="AccChartMaster" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        GL Accounts
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                            <a asp-action="Index" asp-controller="AccChartType" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        GL Accounts Groups
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                            <a asp-action="Index" asp-controller="AccChart" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        GL Accounts Classes
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                            <a asp-action="Index" asp-controller="AccFiscalYear" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                                    <p>
+                                        GL Fiscal Year
+                                    </p>
+                                </a>
+                            </li>
+
+                            @*setup dropdown end*@
+
+
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+                        @*Setup*@
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-wrench"></i>
+                <p>
+                    Setup
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="pages/mailbox/compose.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Restaurant Setup</p>
+                        <i class="fas fa-angle-left right"></i>
+                    </a>
+                    <ul class="nav nav-treeview ml-2">
+
+                                        @*setup dropdown start*@
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller=""  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                   Restaurant Setup
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="User" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    User Account Setup
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Role"  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Access Setup
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller=""  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    System & GL Setup
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller=""  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Fiscal Years
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller=""  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Operational Date Setup
+                                </p>
+                            </a>
+                        </li>
+
+                                        @*setup dropdown end*@
+
+
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                                    <a asp-action="Index" asp-controller="RecManager" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                            Recipe Manager
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="pages/mailbox/compose.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                            <p>Maintenance</p>
+                        <i class="fas fa-angle-left right"></i>
+                    </a>
+                    <ul class="nav nav-treeview ml-2">
+
+                                        @*setup dropdown start*@
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="#"  class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                     DB Backup & Restore
+                                </p>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Main content -->
+
+    <div class="container">
+        <main role="main" class="p-3">
+
+            @*Sucess Dialog start*@
+            <div id="myModalSuccess" class="modal fade text-width:30%;" role="dialog" >
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div id="MyModalSuccessAlertBody" class="modal-body alert alert-success m-0 text-center">
+                            this is modal body. our message will apperar here.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*Sucess Dialog end*@
+
+            @RenderBody()
+        </main>
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer text-center">
+    <strong>Copyright &copy; 2023 <a href="https://raj-int.com/">Raj International</a></strong>
+
+
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+
+
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+
+
+    <script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- ChartJS -->
+    <script src="~/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="~/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="~/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="~/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.js"></script>
+
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="~/dist/js/demo.js"></script>
+    <script src="~/dist/js/pages/dashboard.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script src="~/lib/select2/js/select2.js"></script>*@
+    <script src="~/lib/alertify.js"></script>
+    <script src="~/lib/jquery-confirm.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+

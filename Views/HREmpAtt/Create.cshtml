@@ -1,0 +1,65 @@
+﻿@model RMS.Models.HREmpAtt
+@{
+   
+}
+<h6 style="color: #1275AE; margin-top: 10px;">
+    Human Resource (HR) > Operations > Employee Attendance > Create Attendance
+</h6>
+<hr />
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Attendance Setup</p>
+    </div>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+        <div class="col-md-12">
+            <div class="row p-3">
+                <div class="form-group col-2">
+                    <label asp-for="HREADate" class="control-label"></label>
+                    <input asp-for="HREADate" class="form-control" />
+                    <span asp-validation-for="HREADate" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="HREDId" class="control-label"></label>
+                    <select asp-for="HREDId" class="form-control" asp-items="ViewBag.HREmpDetails"></select>
+                    <span asp-validation-for="HREDId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-2">
+                    <label asp-for="HREAInTime" class="control-label"></label>
+                    <input asp-for="HREAInTime" type="time" class="form-control" id="start" value="08:00" />
+                    <span asp-validation-for="HREAInTime" class="text-danger"></span>
+                </div>
+                <div class="form-group col-2">
+                    <label asp-for="HREAOutTime" class="control-label"></label>
+                    <input asp-for="HREAOutTime" type="time" class="form-control" id="end" value="17:00" />
+                    <span asp-validation-for="HREAOutTime" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-2">
+                    <label asp-for="HREATMinute" class="control-label"></label>
+                    <input asp-for="HREATMinute"  class="form-control"  readonly/>
+                    <span asp-validation-for="HREATMinute" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group btn-group col-12 p-3">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <input type="submit" value="Create" class="btn btn-primary btn-block" style="font-size: 18px;" />
+            </div>
+            <div class="col-4">
+            <a class="btn btn-secondary btn-block" asp-action="index" style="font-size: 18px;"
+                    asp-route-pg="@TempData.Peek("CurrentPage")">Back</a>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="js/site.js"></script>
+}

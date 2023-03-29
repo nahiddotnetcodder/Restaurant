@@ -1,0 +1,109 @@
+﻿@model IEnumerable<RMS.Models.StoreSuppliers>
+@{
+    SortModel sortModel = (SortModel)ViewData["sortModel"];
+    PagerModel pager = ViewBag.Pager;
+    int i = 1;
+}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<div class="container-fluid btn-group">
+    <div class="col-10">
+        <h6 style="color: #1275AE; margin-top: 10px;">
+            Store & Inventory > Maintenance > Store Suppliers > Suppliers List
+        </h6>
+    </div>
+    <div class="col-2 justify-content-end">
+        <p class="pb-3">
+            <a asp-action="Create" class="btn btn-success">Create New</a>
+        </p>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-12">
+        <partial name="_topBar" model="@pager" />
+    </div>
+</div>
+<table class="table table-striped border m-0">
+    <thead>
+        <tr>
+            <th>
+                SL
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("SSName").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("SSName").SortExpression">
+                    @Html.DisplayNameFor(model => model.SSName)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("SSSName").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("SSSName").SortExpression">
+                    @Html.DisplayNameFor(model => model.SSSName)
+                </a>
+            </th>
+            <th>
+                <i class="@sortModel.GetColumn("AccMaster").SortIcon" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortExpression="@sortModel.GetColumn("AccMaster").SortExpression">
+                    @Html.DisplayNameFor(model => model.AccMaster.ACMAccName)
+                </a>
+                
+            </th>
+
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SSName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SSSName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccMaster.ACMAccName)
+                </td>
+                
+                <td>
+                    <div class="btn-group">
+                        <a asp-action="Edit" asp-route-id="@item.SSId">
+                            <span class="btn btn-sm ">
+                                <i class="fa-solid fa-pencil text-success" aria-hidden="true" title="Edit"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a asp-action="Details" asp-route-id="@item.SSId">
+                            <span class="btn btn-sm ">
+                                <i class="fa-regular fa-eye text-primary" aria-hidden="true" title="Details"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a asp-action="Delete" asp-route-id="@item.SSId">
+                            <span class="btn btn-sm remove">
+                                <i class="fa-solid fa-xmark text-danger" aria-hidden="true" title="Delete"></i>
+                            </span>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-12">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

@@ -1,0 +1,150 @@
+﻿@model RMS.Models.HREmpDetails
+@{
+    
+}
+<h6 style="color: #1275AE; margin: 10px;">
+    Human Resource (HR) > Maintenance > Employee Details > Employee Details
+</h6>
+<hr />
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Create Employee Details</p>
+    </div>
+    <form asp-action="Details">
+        <div class="row p-3">
+            <div class="col-md-8">
+                <div class="row">
+                    <!-- controls section -->
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDEId" class="control-label"></label>
+                        <input asp-for="HREDEId" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDEName" class="control-label"></label>
+                        <input asp-for="HREDEName" class="form-control" readonly/>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDPreAdd" class="control-label"></label>
+                        <input asp-for="HREDPreAdd" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDParAdd" class="control-label"></label>
+                        <input asp-for="HREDParAdd" class="form-control" readonly />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label asp-for="HRDId" class="control-label"></label>
+                        <input asp-for="HRDepart.HRDName" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HRDeId" class="control-label"></label>
+                        <input asp-for="HRDesig.HRDeName" class="form-control" readonly />
+                     </div> 
+                    <div class="form-group col-md-6">
+                        <label asp-for="Gender" class="control-label"></label>
+                        <input asp-for="Gender" class="form-control" readonly />
+                     </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDReligion" class="control-label"></label>
+                         <input asp-for="HREDReligion" class="form-control" readonly />
+                        
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDRef" class="control-label"></label>
+                        <input asp-for="HREDRef" class="form-control" readonly/>
+                        
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDRAdd" class="control-label"></label>
+                        <input asp-for="HREDRAdd" class="form-control" readonly/>
+                        
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDJDate" class="control-label"></label>
+                        <input asp-for="HREDJDate" class="form-control" readonly/>
+                      
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDBasic" class="control-label"></label>
+                        <input asp-for="HREDBasic" class="form-control" readonly/>
+                      
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HRWSId" class="control-label"></label>
+                       <input asp-for="HRWStatus.HRWSName" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HREDEmail" class="control-label"></label>
+                        <input asp-for="HREDEmail" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="IsWaiter" class="control-label"></label>
+                        <input asp-for="IsWaiter" type="checkbox" readonly/>
+                        
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="IsActive" class="control-label"></label>
+                        <input asp-for="IsActive" type="checkbox"  readonly/>
+                        
+                    </div>
+                </div>
+                </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label asp-for="HREDFName" class="control-label"></label>
+                        <input asp-for="HREDFName" class="form-control" readonly/>
+                     
+                    </div>
+                    <div class="form-group col-12">
+                        <label asp-for="HREDCont" class="control-label"></label>
+                        <input asp-for="HREDCont" class="form-control" readonly/>
+                       
+                    </div>
+                    <div class="form-group col-12">
+                        <label asp-for="HREDBGroup" class="control-label"></label>
+                            <input asp-for="HREDBGroup" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="HREDMStatus" class="control-label"></label>
+                        <input asp-for="HREDMStatus" class="form-control" readonly />
+
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="HREDNat" class="control-label"></label>
+                        <input asp-for="HREDNat" class="form-control" readonly />
+
+                    </div>
+                    <div class="form-group col-12" style="text-align:center">
+                        <img src="~/images/@Model.HREDPUrl" style="border: 1px; margin-top: 25px; width: 200px; height: 200px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group btn-group col-12 p-3">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <a class="btn btn-primary btn-block" asp-action="Edit" asp-route-id="@Model.HREDId" style=" font-size: px;"
+                    asp-route-pg="@TempData.Peek("CurrentPage")">
+                    Edit
+                </a>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-secondary btn-block" asp-action="index" style="font-size: 18px;"
+                    asp-route-pg="@TempData.Peek("CurrentPage")">Back</a>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,91 @@
+﻿@model RMS.Models.HRLeaveDetail
+@{
+
+}
+<h6 style="color: #1275AE;">
+    Human Resource (HR) >  Operations > Leave Details > Create Leave Details
+</h6>
+<hr />
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;"> View Leave Details</p>
+    </div>
+    <!-- Form Area-->
+    <form asp-action="Details">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="HRLDId" />
+        <div class="btn-group">
+            <div class="col-md-12">
+                <div class="row p-4">
+                    <!-- controls section -->
+                    <div class="form-group col-6">
+                        <label asp-for="HREDId" class="control-label"></label>
+                        <input asp-for="HREmpDetails.HREDEName" class="form-control" readonly/>
+                        
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HRLPId" class="control-label"></label>
+                        <input asp-for="HRLeavePolicy.HRLPName" class="form-control" readonly/>
+                        
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HRLDAppSl" class="control-label"></label>
+                        <input asp-for="HRLDAppSl" class="form-control" readonly/>
+                        
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HRLDAppDate" class="control-label"></label>
+                        <input asp-for="HRLDAppDate" class="form-control" readonly/>
+                       
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HRLDLeaveSDate" class="control-label"></label>
+                        <input asp-for="HRLDLeaveSDate" class="form-control" readonly/>
+                        
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HRLDLeaveEDate" class="control-label"></label>
+                        <input asp-for="HRLDLeaveEDate" class="form-control" readonly />
+                       
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HREDIdSu" class="control-label"></label>
+                        <input asp-for="HREDIdSu" class="form-control" readonly />
+                        
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="HRLDTDay" class="control-label"></label>
+                        <input asp-for="HRLDTDay" class="form-control" readonly />
+                       
+                    </div>
+                    <div class="form-group col-12">
+                        <label asp-for="HRLDReason" class="control-label"></label>
+                        <textarea asp-for="HRLDReason" class="form-control" readonly></textarea>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group btn-group col-12 p-3">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <a class="btn btn-primary btn-block" asp-action="Edit" asp-route-id="@Model.HRLDId" style=" font-size: px;"
+                   asp-route-pg="@TempData.Peek("CurrentPage")">
+                    Update
+                </a>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-secondary btn-block" asp-action="index" style="font-size: 18px;"
+                   asp-route-pg="@TempData.Peek("CurrentPage")">Back</a>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

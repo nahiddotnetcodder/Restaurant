@@ -1,0 +1,92 @@
+﻿@model RMS.Models.StoreIGen
+@{
+    
+}
+
+<h6 style="color: #1275AE; margin: 10px;">
+    Store & Inventory > Maintenance > Item Generation > Item  Details
+</h6>
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">View Item</p>
+    </div>
+    <form asp-action="Details">
+        <div class="row border m-2">
+            <div class="col-md-8 m-auto p-4">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="SCId" class="control-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="StoreCategory.SCName" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="SSCId" class="control-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="StoreSCategory.SSCName" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="SUId" class="control-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="StoreUnits.SUName" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="SIGItemCode" class="control-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="SIGItemCode" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="SIGItemName" class="control-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="SIGItemName" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="SIGRLevel" class="control-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="SIGRLevel" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="SIGRemarks" class="control-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <textarea asp-for="SIGRemarks" class="form-control" readonly></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group btn-group">
+                    <a class="btn btn-success" asp-action="index"
+                       asp-route-pg="@TempData.Peek("CurrentPage")">
+                        <i class="fas fa-arrow-left"></i>
+                        Back To List
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

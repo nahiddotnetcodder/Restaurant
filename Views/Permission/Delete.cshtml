@@ -1,0 +1,37 @@
+﻿@model AccPermission
+
+@{
+    ViewBag.Title = "Delete Permission";
+}
+
+<h1>Delete</h1>
+
+<form method="post" class="mt-3">
+    <input asp-for="Id" hidden class="form-control" readonly/>
+    <div class="form-group">
+        <label asp-for="Key"></label>
+        <input asp-for="Key" class="form-control" readonly/>
+        <span asp-validation-for="Key" class="text-danger"></span>
+    </div>
+	<div class="form-group">
+		<label asp-for="MenuName"></label>
+		<input asp-for="MenuName" class="form-control" readonly/>
+		<span asp-validation-for="MenuName" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="MenuItem"></label>
+		<input asp-for="MenuItem" class="form-control" readonly/>
+		<span asp-validation-for="MenuItem" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="Description"></label>
+		<input asp-for="Description" class="form-control" readonly/>
+		<span asp-validation-for="Description" class="text-danger"></span>
+	</div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Delete</button>
+            <a asp-action="Index" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+</form>

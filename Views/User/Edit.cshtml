@@ -1,0 +1,56 @@
+﻿@model UserViewModel
+
+@{
+    ViewBag.Title = "Edit User";
+    var userRoles = ViewData["UserRoles"] as List<TextValuePair>;
+    var userRolesSelect = new SelectList(userRoles, "Id", "Name");
+}
+
+<h1>Edit User</h1>
+
+<form method="post" class="mt-3">
+    <div class="form-group row">
+        <label asp-for="UserLogin" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="UserLogin" disabled class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Password" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Password" class="form-control">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="FullName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="FullName" class="form-control">
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Email" class="form-control">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="AccessLevelId"></label>
+        <select asp-for="AccessLevelId" asp-items="userRolesSelect" class="custom-select">  
+           <option value="">Choose User Role</option>  
+        </select>
+        <span asp-validation-for="AccessLevelId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IsActive"></label>
+        <input asp-for="IsActive" class="form-control" checked="checked"/>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-action="Index" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+</form>

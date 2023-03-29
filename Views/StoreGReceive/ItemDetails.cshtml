@@ -1,0 +1,79 @@
+﻿@{
+
+}
+<div class="container p-3">
+    <div class="container">
+        <br>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Supplier Name</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody id="ItemDetails"></tbody>
+        </table>
+        <table class="table table-sm table-hover table-bordered">
+            <thead class="dark-mode">
+                <tr style="background:#21909F;">
+                    <th class="text-center" scope="col">Item Code</th>
+                    <th class="text-center" scope="col">Item Name</th>
+                    <th class="text-center" scope="col">Unit</th>
+                    <th class="text-center" scope="col">Quantity</th>
+                    <th class="text-center" scope="col">Unit Price</th>
+                    <th class="text-center" scope="col">Total Price</th>
+                </tr>
+            </thead>
+            <tbody id="tGlPostingDetails" class="txt-align-left">
+            </tbody>
+        </table>
+        <div class="pt-3">
+            <button type="button" class="btn btn-primary print">Print</button>
+            <a type="button" class="btn btn-secondary" asp-controller="StoreGReceive" asp-action="masterDetails">Back</a>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+<script src="~/js/itemReceived.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var url = window.location.href;
+            var id = url.substring(url.lastIndexOf('=') + 1);
+
+            $.ajax({
+                type: "GET",
+                url: "/StoreGReceive/GetById?id=" + id,
+                data: "{}",
+                success: function (data) {
+                    let storeGReceiveDetails = data.storeGReceiveDetails;
+                    $('#ItemDetails').empty();
+                    $('#ItemDetails').append(
+                        `<tr>
+                            <td>` + data.grmDateString + `</td>
+                            <td>` + data.storeSuppliersName + `</td>
+                            <td>` + data.grmRemarks + `</td>
+                        </tr>`
+                    );
+
+                    $('#tGlPostingDetails').empty();
+                    for (var i = 0; i < storeGReceiveDetails.length; i++) {
+                        $('#tGlPostingDetails').append(
+                            `<tr id="Item${++rowTableIdx}">
+                                        <td hidden id="grdId${rowTableIdx}">` + storeGReceiveDetails[i].grdId + `</td>
+                                        <td id="itemCode${rowTableIdx}">` + storeGReceiveDetails[i].itemCode + `</td>
+                                        <td id="itemName${rowTableIdx}">` + storeGReceiveDetails[i].itemName + `</td>
+                                        <td id="grdUnit${rowTableIdx}">` + storeGReceiveDetails[i].unit + `</td>
+                                        <td id="grdQty${rowTableIdx}">` + storeGReceiveDetails[i].grdQty + `</td>
+                                        <td id="grduPrice${rowTableIdx}">` + storeGReceiveDetails[i].grduPrice + `</td>
+                                        <td id="grdtPrice${rowTableIdx}">` + storeGReceiveDetails[i].grdtPrice + `</td>
+                            </tr>`
+                        );
+                    }
+                }
+            });
+        });
+    </script>
+}
