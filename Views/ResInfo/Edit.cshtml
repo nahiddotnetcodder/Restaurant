@@ -1,0 +1,98 @@
+﻿@model RMS.Models.ResInfo
+
+@{
+    string currentModel = Helper.GetTypeName(Model.GetType().ToString());
+}
+<h6 style="color: #1275AE; margin-top: 10px;">
+    Setup > Restaurant Setup > Restaurant Setup > Update Restaurant Setup
+</h6>
+<hr />
+
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Restaurant Setup</p>
+    </div>
+    <form asp-action="Edit" enctype="multipart/form-data" method="post" onsubmit="return ValidateForm()">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ResId" />
+        <div class="row p-3">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="RName" class="control-label"></label>
+                        <input asp-for="RName" class="form-control" />
+                        <span asp-validation-for="RName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="RAddress" class="control-label"></label>
+                        <input asp-for="RAddress" class="form-control" />
+                        <span asp-validation-for="RAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="RCity" class="control-label"></label>
+                        <input asp-for="RCity" class="form-control" />
+                        <span asp-validation-for="RCity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="RPhone" class="control-label"></label>
+                        <input asp-for="RPhone" class="form-control" />
+                        <span asp-validation-for="RPhone" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="REmail" class="control-label"></label>
+                        <input asp-for="REmail" class="form-control" />
+                        <span asp-validation-for="REmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="RSCharge" class="control-label"></label>
+                        <input asp-for="RSCharge" class="form-control"  />
+                        <span asp-validation-for="RSCharge" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="RTax" class="control-label"></label>
+                        <input asp-for="RTax" class="form-control" />
+                        <span asp-validation-for="RTax" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="form-group col-12" >
+                        <label asp-for="RCLogo" class="control-label"></label>
+                        <input type="hidden" asp-for="RCLogoUrl" />
+                        <div class="custom-file">
+                            <input asp-for="RCLogo" class="custom-file-input" id="RCLogo"
+                                   onchange="document.getElementById('PhotoPrv').src=window.URL.createObjectURL(this.files[0])">
+                            <label class="custom-file-label" for="RCLogo">@Model.RCLogoName</label>
+                        </div>
+                        <span asp-validation-for="RCLogo" class="text-danger"></span>
+                        <img id="PhotoPrv" src="~/images/@Model.RCLogoUrl" style="border: 1px; margin: 10px; width: 300px; height: 300px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group btn-group col-12 p-3">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <input type="submit" value="Update" class="btn btn-primary btn-block" style="font-size: 18px;" />
+            </div>
+            <div class="col-4">
+                <a class="btn btn-secondary btn-block" asp-action="index" style="font-size: 18px;"
+                   asp-route-pg="@TempData.Peek("CurrentPage")">Back</a>
+            </div>
+            <div class="col-2"></div>
+        </div>
+
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(.custom - file - input).on("change", function () {
+            var fileName = $(this).val(), split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

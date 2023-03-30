@@ -42,6 +42,5 @@ namespace RMS.Models
         [NotMapped]
         public string Items { get; set; }
         public virtual List<StoreGIssueDetails> StoreGIssueDetails { get; set; }
-
     }
 }

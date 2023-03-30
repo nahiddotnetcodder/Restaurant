@@ -74,6 +74,7 @@ builder.Services.AddScoped<IResKitchenInfo, ResKitchenInfoRepo>();
 builder.Services.AddScoped<IResTable, ResTableRepo>();
 builder.Services.AddScoped<IResMenu, ResMenuRepo>();
 builder.Services.AddScoped<IRecManagerMaster, RecManagerMasterRepo>();
+builder.Services.AddScoped<IResInfo, ResInfoRepo>();
 
 
 

@@ -1,5 +1,4 @@
 ﻿var rowTableIdx = 0;
-var rowJournalTableIdx = 0;
 var allAccounts = [];
 var itemList = [];
 
@@ -242,7 +241,7 @@ function SaveRequest() {
     var tablelength = $('#tGLPostingListbody tr').length;
     for (var i = 1; i <= tablelength; i++) {
         itemList.push({
-            grdId: $('#gidId' + i).text(),
+            gidId: $('#gidId' + i).text(),
             itemCode: $('#itemCode' + i).text(),
             itemName: $('#itemName' + i).text(),
             unit: $('#unit' + i).text(),

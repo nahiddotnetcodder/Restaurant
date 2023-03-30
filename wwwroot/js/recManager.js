@@ -244,7 +244,7 @@ function SaveRequest() {
     for (var i = 1; i <= tablelength; i++) {
         itemList.push({
             rmdId: $('#rmdId' + i).text(),
-            sigItemCode: $('#sigItemCode' + i).text(),
+            sigitemCode: $('#sigItemCode' + i).text(),
             sigItemName: $('#sigItemName' + i).text(),
             rmdQty: $("#rmdQty" + i).text(),
             sigUnit: $('#sigUnit' + i).text(),
@@ -418,10 +418,10 @@ function getDescriptionDD() {
 
 
 $('#tJournalListbody').on('click', '.view', function () {
-    window.location = '/StoreGReceive/ItemDetails?id=' + $(this)[0].id;
+    window.location = '/RecManager/ItemDetails?id=' + $(this)[0].id;
 });
 $('#tJournalListbody').on('click', '.edit', function () {
-    window.location = '/StoreGReceive/Edit?id=' + $(this)[0].id;
+    window.location = '/RecManager/Edit?id=' + $(this)[0].id;
 });
 $('.print').click(function () {
     $("#nonPrintArea").hide();

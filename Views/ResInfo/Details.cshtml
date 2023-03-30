@@ -1,0 +1,85 @@
+﻿@model RMS.Models.ResInfo
+
+@{
+    string currentModel = Helper.GetTypeName(Model.GetType().ToString());
+}
+<h6 style="color: #1275AE; margin-top: 10px;">
+    Setup > Restaurant Setup > Restaurant Setup > Restaurant Details
+</h6>
+<hr />
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Restaurant Details</p>
+    </div>
+    <form asp-action="Details">
+        <div class="row p-3">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="RName" class="control-label"></label>
+                        <input asp-for="RName" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="RAddress" class="control-label"></label>
+                        <input asp-for="RAddress" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="RCity" class="control-label"></label>
+                        <input asp-for="RCity" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="RPhone" class="control-label"></label>
+                        <input asp-for="RPhone" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="REmail" class="control-label"></label>
+                        <input asp-for="REmail" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="RSCharge" class="control-label"></label>
+                        <input asp-for="RSCharge" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="RTax" class="control-label"></label>
+                        <input asp-for="RTax" class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="form-group col-12" style="text-align:center">
+                        <img src="~/images/@Model.RCLogoUrl" style="border: 1px; margin-top: 25px; width: 200px; height: 200px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group btn-group col-12 p-3">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <a class="btn btn-primary btn-block" asp-action="Edit" asp-route-id="@Model.ResId" style=" font-size: px;"
+                    asp-route-pg="@TempData.Peek("CurrentPage")">
+                    Edit
+                </a>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-secondary btn-block" asp-action="index" style="font-size: 18px;"
+                    asp-route-pg="@TempData.Peek("CurrentPage")">Back</a>
+            </div>
+            <div class="col-2"></div>
+        </div>
+
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript">
+        $(.custom - file - input).on("change", function () {
+            var fileName = $(this).val(), split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

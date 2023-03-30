@@ -73,7 +73,7 @@ namespace RMS.Controllers
         [HttpPost]
         public async Task<ActionResult> Save(StoreGIssueMaster model)
         {
-            if(model.Items == "[]")
+            if (model.Items == "[]")
             {
                 TempData["ErrorMessage"] = "Item code was null!";
                 return View();

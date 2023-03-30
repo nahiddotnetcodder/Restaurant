@@ -1143,6 +1143,54 @@ namespace RMS.Migrations
                     b.ToTable("ResFoodType");
                 });
 
+            modelBuilder.Entity("RMS.Models.ResInfo", b =>
+                {
+                    b.Property<int>("ResId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ResId"), 1L, 1);
+
+                    b.Property<string>("RAddress")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("RCLogoUrl")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("RCity")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("REmail")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("RName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("RPhone")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("RSCharge")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RTax")
+                        .HasColumnType("int");
+
+                    b.HasKey("ResId");
+
+                    b.ToTable("ResInfo");
+                });
+
             modelBuilder.Entity("RMS.Models.ResKitchenInfo", b =>
                 {
                     b.Property<int>("RKId")

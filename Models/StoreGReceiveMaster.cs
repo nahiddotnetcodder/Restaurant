@@ -13,7 +13,6 @@ namespace RMS.Models
         [Key]
         public int GRMId { get; set; }
 
-
         public DateTime GRMDate { get; set; }
         [NotMapped]
         public string GRMDateString

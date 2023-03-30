@@ -21,6 +21,6 @@ namespace RMS.Models
         }
         [StringLength(50)]
         public string CUser { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
     }
 }

@@ -53,6 +53,7 @@ namespace RMS.Data
         public virtual DbSet<ResMenu> ResMenu { get; set; }
         public virtual DbSet<RMMaster> RMMaster { get; set; }
         public virtual DbSet<RMDetails> RMDetails { get; set; }
+        public virtual DbSet<ResInfo> ResInfo { get; set; }
 
     }
 }
