@@ -460,3 +460,212 @@ $("#grduPrice, #grdQty").keyup(function () {
 });
 
 
+/*inline edit*/
+function getAllItemFromDB(parameter) {
+    $.ajax({
+        type: "GET",
+        url: "/StoreGReceive/GetAllItems",
+        data: "{}",
+        success: function (response) {
+
+            var accounts = response.chartMasterDD;
+            var subGroups = response.chartTypeDD;
+
+            var o = new Option("Select Account", "-1");
+            $(o).html("Please Select Item");
+            $("#ddlitemName" + parameter).append(o);
+
+            for (var i = 0; i < subGroups.length; i++) {
+                var optgroup = "<optgroup label='" + subGroups[i].name + "'>";
+                var data = accounts.filter(x => x.accountGroupId == subGroups[i].id);
+                for (var j = 0; j < data.length; j++) {
+                    optgroup += "<option value='" + data[j].id + "'>" + data[j].name + "</option>"
+                }
+                optgroup += "</optgroup>";
+                $("#ddlitemName" + parameter).append(optgroup);
+            }
+        }
+    });
+}
+
+$('#tGLPostingListbody').on('change',
+    '.itemChangesFromRow',
+    function () {
+        debugger
+        let getDomId = $(this).attr('id');
+        var rowTrackId = getDomId.slice(10);
+        var value = $("#itemCode" + rowTrackId).val();
+        var account = allAccounts.filter(x => x.code == value)[0];
+        if (account != undefined) {
+            $('#ddlitemName' + rowTrackId).val(account.id);
+            $('#ddlitemName' + rowTrackId).change();
+        }
+        else {
+            $('#ddlitemName' + rowTrackId).val(-1);
+            $('#ddlitemName' + rowTrackId).change();
+        }
+    });
+$('#tGLPostingListbody').on('change',
+    '.itemChangesFromRow',
+    function () {
+        let getDomId = $(this).attr('id');
+        var rowTrackId = getDomId.slice(20);
+        var value = $("#ddlitemName" + rowTrackId).val();
+        var account = allAccounts.filter(x => x.id == value)[0];
+
+        if (account != undefined) {
+            $('#itemCode' + rowTrackId).val(account.code);
+            $('#unit' + rowTrackId).val(account.code);
+        }
+        else {
+            $('#itemCode' + rowTrackId).val();
+            $('#unit' + rowTrackId).val();
+        }
+    });
+$('#tGLPostingListbody').on('click', '.add', function () {
+
+    let getDomId = $(this).closest('tr').attr('id');
+    rowIdx = parseInt(getDomId.slice(1));
+
+        rowIdx += 1;
+        $('#tGLPostingListbody').append(`
+            <tr id="R${rowIdx}">
+                <td>
+                    <input type="text" class="form-control itemChangesFromRow" id="itemCode${rowIdx}" />
+                </td>
+                <td>
+                    <select class="form-control accountChangesFromRow autoSuggestionSelect" id="ddlitemName${rowIdx}" name="ddlitemName"></select>
+                </td>
+                <td>
+                    <input type="text" class="form-control accountChangesFromRow" id="unit${rowIdx}" />
+                </td>
+                <td>
+                    <input type="text" class="form-control numbersOnly" placeholder="0.00" id="grdQty${rowIdx}" />
+                </td>
+                <td>
+                    <input type="text" class="form-control numbersOnly" placeholder="0.00" id="grduPrice${rowIdx}" />
+                </td>
+                 <td>
+                    <input type="text" class="form-control numbersOnly" placeholder="0.00" id="grdtPrice${rowIdx}" />
+                </td>
+                <td class="text-center">
+                    <div id="addItem${rowIdx}" class="row">
+                        <a style="cursor:pointer" class="btn btn-primary add"><i class="bi bi-plus-circle"></i>add</a>
+                    </div>
+                    <div id="updateItem${rowIdx}" class="row">
+                        <button style='margin-left:2px' class="btn btn-primary edit" type="button"><i class="fa fa-edit" aria-hidden="true"></i>upd</button>
+                        <button style='margin-left:2px' class="btn btn-danger remove" type="button"><i class="fa fa-trash" aria-hidden="true"></i>del</button>
+                    </div>
+                    <div id="saveAsUpdatedItem${rowIdx}" class="row">
+                        <button style='margin-left:2px' class="btn btn-primary sav" type="button"><i class="fa fa-edit" aria-hidden="true"></i>sav</button>
+                        <button style='margin-left:2px' class="btn btn-danger can" type="button"><i class="fa fa-trash" aria-hidden="true"></i>can</button>
+                    </div>
+                </td>
+            </tr>`);
+            getAllItemFromDB(rowIdx);
+        $('.autoSuggestionSelect').css('width', '100%');
+        $(".autoSuggestionSelect").select2({});
+        $("#updateItem" + rowIdx).hide();
+        $("#saveAsUpdatedItem" + rowIdx).hide();
+        var prevRowIdx = rowIdx - 1;
+        $("#addItem" + prevRowIdx).hide();
+        $("#itemCode" + prevRowIdx).prop('disabled', true);
+        $("#ddlitemName" + prevRowIdx).prop('disabled', true);
+        $("#updateItem" + prevRowIdx).show();
+        $("#saveAsUpdatedItem" + prevRowIdx).hide();
+});
+$('#tGLPostingListbody').on('click', '.edit', function () {
+    let getDomId = $(this).closest('tr').attr('id');
+    rowIdx = parseInt(getDomId.slice(1));
+
+    itemCode = $("#itemCode" + rowIdx).val();
+    ddlitemName = $("#ddlitemName" + rowIdx).val();
+    unit = $("#unit" + rowIdx).val();
+    grduPrice = $("#grduPrice" + rowIdx).val();
+    grdtPrice = $("#grdtPrice" + rowIdx).val();
+
+    $("#itemCode" + rowIdx).prop('disabled', false);
+    $("#ddlitemName" + rowIdx).prop('disabled', false);
+    $("#unit" + rowIdx).prop('disabled', false);
+    $("#grduPrice" + rowIdx).prop('disabled', false);
+    $("#grdtPrice" + rowIdx).prop('disabled', false);
+    $("#updateItem" + rowIdx).hide();
+    $("#saveAsUpdatedItem" + rowIdx).show();
+});
+$('#tGLPostingListbody').on('click', '.remove', function () {
+    $(this).closest('tr').remove();
+});
+$('#tGLPostingListbody').on('click', '.sav', function () {
+    let getDomId = $(this).closest('tr').attr('id');
+    rowIdx = parseInt(getDomId.slice(1));
+
+    $("#itemCode" + rowIdx).prop('disabled', true);
+    $("#ddlitemName" + rowIdx).prop('disabled', true);
+    $("#unit" + rowIdx).prop('disabled', true);
+    $("#grduPrice" + rowIdx).prop('disabled', true);
+    $("#grdtPrice" + rowIdx).prop('disabled', true);
+    $("#updateItem" + rowIdx).show();
+    $("#saveAsUpdatedItem" + rowIdx).hide();
+    
+});
+$('#tGLPostingListbody').on('click', '.can', function () {
+    let getDomId = $(this).closest('tr').attr('id');
+    rowIdx = parseInt(getDomId.slice(1));
+
+    $("#itemCode" + rowIdx).val(accCode);
+    $("#ddlitemName" + rowIdx).val(accDesc);
+    $("#ddlitemName" + rowIdx).change();
+    //$("#agtDebitAccount" + rowIdx).val(debit);
+    //$("#agtCreditAccount" + rowIdx).val(credit);
+    //$("#agtMemo" + rowIdx).val(memo);
+
+    $("#itemCode" + rowIdx).prop('disabled', true);
+    $("#ddlitemName" + rowIdx).prop('disabled', true);
+    $("#unit" + rowIdx).prop('disabled', true);
+    $("#grduPrice" + rowIdx).prop('disabled', true);
+    $("#grdtPrice" + rowIdx).prop('disabled', true);
+    $("#updateItem" + rowIdx).show();
+    $("#saveAsUpdatedItem" + rowIdx).hide();
+});
+function addFirstRow() {
+    rowIdx = 0;
+    $('#tGLPostingListbody').append(`
+    <tr id="R${rowIdx}">
+        <td>
+            <input type="text" class="form-control itemChangesFromRow" id="itemCode${rowIdx}" />
+        </td>
+        <td>
+            <select class="form-control accountChangesFromRow autoSuggestionSelect" id="ddlitemName${rowIdx}" name="ddlitemName"></select>
+        </td>
+        <td>
+            <input type="text" class="form-control accountChangesFromRow" id="unit${rowIdx}" />
+        </td>
+        <td>
+            <input type="text" class="form-control numbersOnly" placeholder="0.00" id="grdQty${rowIdx}" />
+        </td>
+        <td>
+            <input type="text" class="form-control numbersOnly" placeholder="0.00" id="grduPrice${rowIdx}" />
+        </td>
+         <td>
+            <input type="text" class="form-control numbersOnly" placeholder="0.00" id="grdtPrice${rowIdx}" />
+        </td>
+        <td class="text-center">
+            <div id="addItem${rowIdx}" class="row">
+                <a style="cursor:pointer" class="btn btn-primary add"><i class="bi bi-plus-circle"></i>add</a>
+            </div>
+            <div id="updateItem${rowIdx}" class="row">
+                <button style='margin-left:2px' class="btn btn-primary edit" type="button"><i class="fa fa-edit" aria-hidden="true"></i>upd</button>
+                <button style='margin-left:2px' class="btn btn-danger remove" type="button"><i class="fa fa-trash" aria-hidden="true"></i>del</button>
+            </div>
+            <div id="saveAsUpdatedItem${rowIdx}" class="row">
+                <button style='margin-left:2px' class="btn btn-primary sav" type="button"><i class="fa fa-edit" aria-hidden="true"></i>sav</button>
+                <button style='margin-left:2px' class="btn btn-danger can" type="button"><i class="fa fa-trash" aria-hidden="true"></i>can</button>
+            </div>
+        </td>
+    </tr>`);
+    getAllItemFromDB(rowIdx);
+    $('.autoSuggestionSelect').css('width', '100%');
+    $(".autoSuggestionSelect").select2({});
+    $("#updateItem" + rowIdx).hide();
+    $("#saveAsUpdatedItem" + rowIdx).hide();
+}

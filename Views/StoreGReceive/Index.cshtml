@@ -60,7 +60,7 @@
                     <tbody id="tGLPostingListbody" class="txt-align-left">
                     </tbody>
                 </table>
-                <table class="table table-sm  table-bordered">
+                @*<table class="table table-sm  table-bordered">
                     <tr>
                         <td style="width:16%"><input id="itemCode" type="text" class="form-control" required /></td>
                         <td style ="width:17.5%">
@@ -85,7 +85,7 @@
                             <button type="button" id="addGLPosting" class="btn btn-secondary" onclick="addItem()">Add Item</button>
                         </td>
                     </tr>
-                </table>
+                </table>*@
             </div>
         </div>
 
@@ -109,6 +109,7 @@
         $(document).ready(function () {
             getInitData();
             dateValue();
+            addFirstRow();
         });
     </script>
 }

@@ -66,7 +66,7 @@ namespace RMS.Controllers
         [HttpPost]
         public async Task<ActionResult> Save(AccJournal model)
         {
-            if(model.Items != null)
+            if (model.Items != null)
             {
                 var jsonItems = JsonConvert.DeserializeObject<List<AccGlTrans>>(model.Items);
                 model.AccGlTrans = jsonItems;
@@ -102,6 +102,26 @@ namespace RMS.Controllers
             }
             var result = await _repo.Update(model);
             return Json(result);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllAccount()
+        {
+            var chartType = await _repoType.GetAll();
+            var chartTypeDD = chartType.Select(x => new NameIdPair
+            {
+                Id = x.ACTId,
+                Name = x.ACTName
+            }).ToList();
+            var chartMaster = await _repoMaster.GetAll();
+            var chartMasterDD = chartMaster.Select(x => new NameIdAccountGroupPair
+            {
+                Id = x.ACMId,
+                AccountGroupId = x.ACTId,
+                Name = x.ACMAccCode + " " + x.ACMAccName,
+                Code = x.ACMAccCode,
+                Description = x.ACMAccName
+            }).ToList();
+            return new JsonResult(new { chartMasterDD, chartTypeDD });
         }
     }
 }

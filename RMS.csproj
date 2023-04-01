@@ -29,7 +29,6 @@
     <None Include="Views\AccChart\Index.cshtml" />
     <None Include="Views\AccFiscalYear\Index.cshtml" />
     <None Include="Views\AccJournalEntry\Edit.cshtml" />
-    <None Include="Views\AccJournalEntry\Index.cshtml" />
     <None Include="Views\AccJournalEntry\JournalDetails.cshtml" />
     <None Include="Views\AccJournalEntry\Journals.cshtml" />
     <None Include="Views\Home\Index.cshtml" />

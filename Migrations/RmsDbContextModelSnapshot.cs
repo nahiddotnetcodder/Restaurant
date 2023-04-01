@@ -1406,8 +1406,8 @@ namespace RMS.Migrations
                     b.Property<float>("GIDQty")
                         .HasColumnType("real");
 
-                    b.Property<int>("GIDTPrice")
-                        .HasColumnType("int");
+                    b.Property<float>("GIDTPrice")
+                        .HasColumnType("real");
 
                     b.Property<decimal>("GIDUPrice")
                         .HasColumnType("smallmoney");

@@ -52,6 +52,32 @@
                     $('#' + ctrlId + '_err_div').remove();
                 }
             }
+            $(document).on("input propertychange", ".numbersOnly", function (event) {
+                var valStr = $(this).val();
+                var id = $(this).attr("id");
+                var val = parseInt(valStr);
+                if (isNaN(val)) {
+                    $(this).val("");
+                }
+                else if (val < 0) {
+                    $(this).val("");
+                } else {
+                    $(this).val(val);
+                }
+            });
+            $(document).ready(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/Role/GetUserAssignedMenus",
+                    success: function (response) {
+                        if (response != null) {
+                            var htmlData = response;
+                            $('#assignedMenus').empty();
+                            $('#assignedMenus').append(htmlData);
+                        }
+                    }
+                });
+            });
         </script>
 
     </head>

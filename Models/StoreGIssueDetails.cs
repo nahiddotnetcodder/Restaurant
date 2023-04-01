@@ -31,7 +31,7 @@ namespace RMS.Models
         [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         [Display(Name = "Total Price")]
         [Required]
-        public int GIDTPrice { get; set; }
+        public float GIDTPrice { get; set; }
 
         [ForeignKey("StoreGIssueMaster")]
         public int GIMId { get; set; }

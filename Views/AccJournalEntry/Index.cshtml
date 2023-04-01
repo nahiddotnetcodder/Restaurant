@@ -1,13 +1,6 @@
 ﻿@{
     
 }
-<h6 style="color: #1275AE;">
-    Accounting > Transaction > Journal Entry > Journal Entry setup
-</h6>
-<hr />
-<div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
-    <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">Journal Entry setup</p>
-</div>
 <div class="container p-3">
     <div class="row">
         <div class="col-4">
@@ -54,70 +47,24 @@
             </div>
         </div>
     </div>
-    <div class="card mb-4">
-        <div class="card-header">
-            <h4 class="margin-0px">GL Postings</h4>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <div class="row mb-1">
-                            <div class="col-5"><label>Account Code</label></div>
-                            <div class="col-7"><input id="agtAccCode" type="text" class="form-control" required /></div>
-                        </div>
-                        <div class="row mb-1">
-                            <div class="col-5"><label>Account Description</label></div>
-                            <div class="col-7">
-                                <select class="form-control autoSuggestionSelect" aria-label=".form-select-sm example" id="ddlAGTAccDescription" required>
-                                    <option value="">Please Select Account</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mb-1">
-                            <div class="col-5"><label>Memo</label></div>
-                            <div class="col-7"><input id="agtMemo" type="text" class="form-control" required /></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <div class="row mb-1">
-                            <div class="col-5"><label>Debit</label></div>
-                            <div class="col-7"><input id="agtDebitAccount" type="text" class="form-control onlyNumber" placeholder="0.00" required /></div>
-                        </div>
-                        <div class="row mb-1">
-                            <div class="col-5"><label>Credit</label></div>
-                            <div class="col-7"><input id="agtCreditAccount" type="text" class="form-control onlyNumber" placeholder="0.00" required /></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12" style="text-align:right">
-                    <button type="button" id="addGLPosting" class="btn btn-secondary" onclick="addItem()" >Add item</button>
-                </div>
-            </div>
-            <div style="margin-top:10px" class="card">
-                <div class="card-header"><b>GL posting List </b></div>
-                <div class="card-body table-responsive">
-                    <span id="app_err-container"></span>
-                    <table class="table table-sm table-hover table-bordered">
-                        <thead class="dark-mode">
-                            <tr>
-                                <th class="text-center" scope="col">Account Code</th>
-                                <th class="text-center" scope="col">Account Description</th>
-                                <th class="text-center" scope="col">Debit</th>
-                                <th class="text-center" scope="col">Credit</th>
-                                <th class="text-center" scope="col">Memo</th>
-                                <th class="text-center" scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tGLPostingListbody" class="txt-align-left">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    <div style="margin-top:10px" class="card">
+        <div class="card-header"><b>GL Postings </b></div>
+        <div class="card-body table-responsive">
+            <span id="app_err-container"></span>
+            <table class="table table-sm table-hover table-bordered">
+                <thead class="dark-mode">
+                    <tr>
+                        <th class="text-center" scope="col">Account Code</th>
+                        <th class="text-center" scope="col">Account Description</th>
+                        <th class="text-center" scope="col">Debit</th>
+                        <th class="text-center" scope="col">Credit</th>
+                        <th class="text-center" scope="col">Memo</th>
+                        <th class="text-center" scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tGLPostingListbody" class="txt-align-left">
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="row">
@@ -148,6 +95,7 @@
         $(document).ready(function () {
             getInitData();
             setCurrentDate();
+            addFirstRow(0);
         });
     </script>
 }

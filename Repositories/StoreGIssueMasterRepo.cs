@@ -75,8 +75,8 @@ namespace RMS.Repositories
                 {
                     GIMId = item.GIMId,
                     GIMDate = item.GIMDate,
-                    HRDepartName = item.HRDepart == null ? string.Empty : item.HRDepart.HRDName,
-                    GIMRemarks = item.GIMRemarks,
+                    HRDepartName = item.HRDepart.HRDName,
+                    GIMRemarks = string.IsNullOrEmpty(item.GIMRemarks) ? string.Empty : item.GIMRemarks,
                     CUser = item.CUser
                 });
             }

@@ -235,7 +235,7 @@ function SaveRequest() {
     var result = validationCheck();
     if (result == false) { return; }
     var data = new FormData();
-
+    debugger
     data.append('RMMId', 0);
     data.append('RMItemCode', $('#ddliteCode').val());
     data.append('RMItemName', $('#rmItemName').val());
@@ -243,16 +243,16 @@ function SaveRequest() {
     var tablelength = $('#titemListbody tr').length;
     for (var i = 1; i <= tablelength; i++) {
         itemList.push({
-            rmdId: $('#rmdId' + i).text(),
-            sigitemCode: $('#sigItemCode' + i).text(),
-            sigItemName: $('#sigItemName' + i).text(),
-            rmdQty: $("#rmdQty" + i).text(),
-            sigUnit: $('#sigUnit' + i).text(),
-            sgsUPrice: $('#sgsUPrice' + i).text(),
-            totalCost: $('#totalCost' + i).text()
+            rmdId: $('#rmdId' + i).val(),
+            sigitemCode: $('#sigItemCode' + i).val(),
+            sigItemName: $('#sigItemName' + i).val(),
+            rmdQty: $("#rmdQty" + i).val(),
+            sigUnit: $('#sigUnit' + i).val(),
+            sgsUPrice: $('#sgsUPrice' + i).val(),
+            totalCost: $('#totalCost' + i).val()
         });
-       
-    }
+
+    } debugger
     data.append('Items', JSON.stringify(itemList));
 
     $.ajax({
