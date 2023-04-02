@@ -129,5 +129,28 @@ namespace RMS.Controllers
             var date = _repo.getdate();
             return new JsonResult(date);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAllIssue()
+        {
+            var chartType = await _stock.GetAll();
+            var chartTypeDD = chartType.Select(x => new NameIdPair
+            {
+                Id = x.SGSId,
+                Name = x.ItemName
+            }).ToList();
+
+            var chartMaster = await _stock.GetAll();
+            var chartMasterDD = chartMaster.Select(x => new NameIdAccountGroupPair
+            {
+                Id = x.SGSId,
+                AccountGroupId = x.SGSId,
+                Name = x.ItemCode + " " + x.ItemName,
+                Code = x.ItemCode,
+                Description = x.ItemName,
+                Unit = x.Unit,
+                Price = x.SGSUPrice
+            }).ToList();
+            return new JsonResult(new { chartMasterDD, chartTypeDD });
+        }
     }
 }

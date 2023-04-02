@@ -1,0 +1,78 @@
+﻿@{
+
+}
+<div class="container p-3">
+    <div class="container">
+        <br>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Recipe Item Code</th>
+                    <th>Recipe Item Name</th>
+                </tr>
+            </thead>
+            <tbody id="ItemDetails"></tbody>
+        </table>
+        <table class="table table-sm table-hover table-bordered">
+            <thead class="dark-mode">
+                <tr style="background:#21909F;">
+                    <th class="text-center" scope="col">Item Code</th>
+                    <th class="text-center" scope="col">Item Name</th>
+                    <th class="text-center" scope="col">Unit</th>
+                    <th class="text-center" scope="col">Quantity</th>
+                    <th class="text-center" scope="col">Unit Price</th>
+                    <th class="text-center" scope="col">Total Price</th>
+                </tr>
+            </thead>
+            <tbody id="tRlPostingDetails" class="txt-align-left">
+            </tbody>
+        </table>
+        <div class="pt-3">
+            <button type="button" class="btn btn-primary print">Print</button>
+            <a type="button" class="btn btn-secondary" asp-controller="RecManager" asp-action="masterDetails">Back</a>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+<script src="~/js/recManager.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var url = window.location.href;
+            var id = url.substring(url.lastIndexOf('=') + 1);
+
+            $.ajax({
+                type: "GET",
+                url: "/RecManager/GetById?id=" + id,
+                data: "{}",
+                success: function (data) {
+                    let RMDetails = data.RMDetails;
+                    $('#ItemDetails').empty();
+                    $('#ItemDetails').append(
+                        `<tr>
+                            <td>` + data.rmItemCode + `</td>
+                            <td>` + data.rmItemName + `</td>
+                        </tr>`
+                    );
+
+                    $('#tRlPostingDetails').empty();
+                    for (var i = 0; i < RMDetails.length; i++) {
+                        debugger
+                        $('#tRlPostingDetails').append(
+                            `<tr id="Item${++rowTableIdx}">
+                                <td hidden id="rmdId${rowTableIdx}">` + storeGReceiveDetails[i].grdId + `</td>
+                                <td id="sigitemCode${rowTableIdx}">` + storeGReceiveDetails[i].sigitemCode + `</td>
+                                <td id="sigItemName${rowTableIdx}">` + storeGReceiveDetails[i].sigItemName + `</td>
+                                <td id="rmdQty${rowTableIdx}">` + storeGReceiveDetails[i].rmdQty + `</td>
+                                <td id="sigUnit${rowTableIdx}">` + storeGReceiveDetails[i].sigUnit + `</td>
+                                <td id="sgsUPrice${rowTableIdx}">` + storeGReceiveDetails[i].sgsUPrice + `</td>
+                                <td id="totalCost${rowTableIdx}">` + storeGReceiveDetails[i].totalCost + `</td>
+                            </tr>`
+                        );
+                    }
+                }
+            });
+        });
+    </script>
+}

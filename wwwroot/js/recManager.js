@@ -235,11 +235,10 @@ function SaveRequest() {
     var result = validationCheck();
     if (result == false) { return; }
     var data = new FormData();
-    debugger
     data.append('RMMId', 0);
     data.append('RMItemCode', $('#ddliteCode').val());
     data.append('RMItemName', $('#rmItemName').val());
-
+    debugger
     var tablelength = $('#titemListbody tr').length;
     for (var i = 1; i <= tablelength; i++) {
         itemList.push({
@@ -252,7 +251,7 @@ function SaveRequest() {
             totalCost: $('#totalCost' + i).val()
         });
 
-    } debugger
+    } 
     data.append('Items', JSON.stringify(itemList));
 
     $.ajax({
@@ -327,7 +326,6 @@ function getAll() {
         data: "{}",
         success: function (data) {
             let items = data;
-            debugger
             $('#tJournalListbody').empty();
             for (var i = 0; i < items.length; i++) {
 
